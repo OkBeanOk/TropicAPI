@@ -10,6 +10,7 @@ public class CenteredMessagesAPI {
 			player.sendMessage("");
 			return;
 		}
+		
 		message = ColorAPI.process(message);
 
 		int messagePxSize = 0;
