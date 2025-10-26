@@ -22,9 +22,9 @@ public final class TropicAPI extends JavaPlugin {
 		long startTime = System.currentTimeMillis();
 
 		LOGGER.info("========================================");
-		LOGGER.info("[TropicChatCore] Starting initialization...");
-		LOGGER.info("[TropicChatCore] Version: " + getDescription().getVersion());
-		LOGGER.info("[TropicChatCore] Server: " + Bukkit.getVersion());
+		LOGGER.info("[TropicAPI] Starting initialization...");
+		LOGGER.info("[TropicAPI] Version: " + getDescription().getVersion());
+		LOGGER.info("[TropicAPI] Server: " + Bukkit.getVersion());
 		LOGGER.info("========================================");
 
 		// Check for dependent plugins
@@ -33,21 +33,21 @@ public final class TropicAPI extends JavaPlugin {
 		try {
 			// Initialize GUI System
 			if (!initializeGUISystem()) {
-				LOGGER.severe("[TropicChatCore] ✗ GUI system initialization failed! Disabling plugin...");
+				LOGGER.severe("[TropicAPI] ✗ GUI system initialization failed! Disabling plugin...");
 				getServer().getPluginManager().disablePlugin(this);
 				return;
 			}
 
 			long endTime = System.currentTimeMillis();
 			LOGGER.info("========================================");
-			LOGGER.info("[TropicChatCore] ✓ Plugin enabled successfully!");
-			LOGGER.info("[TropicChatCore] Initialization took " + (endTime - startTime) + "ms");
+			LOGGER.info("[TropicAPI] ✓ Plugin enabled successfully!");
+			LOGGER.info("[TropicAPI] Initialization took " + (endTime - startTime) + "ms");
 			LOGGER.info("========================================");
 
 		} catch (Exception e) {
 			LOGGER.severe("========================================");
-			LOGGER.severe("[TropicChatCore] ✗ CRITICAL ERROR during initialization!");
-			LOGGER.severe("[TropicChatCore] " + e.getMessage());
+			LOGGER.severe("[TropicAPI] ✗ CRITICAL ERROR during initialization!");
+			LOGGER.severe("[TropicAPI] " + e.getMessage());
 			e.printStackTrace();
 			LOGGER.severe("========================================");
 			getServer().getPluginManager().disablePlugin(this);
@@ -58,32 +58,32 @@ public final class TropicAPI extends JavaPlugin {
     public void onDisable() {
 
 		LOGGER.info("========================================");
-		LOGGER.info("[TropicChatCore] Starting shutdown sequence...");
+		LOGGER.info("[TropicAPI] Starting shutdown sequence...");
 		LOGGER.info("========================================");
 
 		if (guiManager != null) {
 			try {
-				LOGGER.info("[TropicChatCore] Closing all open GUIs...");
+				LOGGER.info("[TropicAPI] Closing all open GUIs...");
 				for (Player player : getServer().getOnlinePlayers()) {
 					if (player.getOpenInventory() != null) {
 						player.closeInventory();
 					}
 				}
-				LOGGER.info("[TropicChatCore] ✓ All GUIs closed");
+				LOGGER.info("[TropicAPI] ✓ All GUIs closed");
 			} catch (Exception e) {
-				LOGGER.warning("[TropicChatCore] ✗ Failed to close GUIs: " + e.getMessage());
+				LOGGER.warning("[TropicAPI] ✗ Failed to close GUIs: " + e.getMessage());
 			}
 		}
 
 		try {
-			LOGGER.info("[TropicChatCore] Clearing references...");
+			LOGGER.info("[TropicAPI] Clearing references...");
 			guiManager = null;
 		}  catch (Exception e) {
-			LOGGER.warning("[TropicChatCore] ✗ Failed to clear references: " + e.getMessage());
+			LOGGER.warning("[TropicAPI] ✗ Failed to clear references: " + e.getMessage());
 		}
 
 		LOGGER.info("========================================");
-		LOGGER.info("[TropicChatCore] Shutdown complete!");
+		LOGGER.info("[TropicAPI] Shutdown complete!");
 		LOGGER.info("========================================");
     }
 
@@ -92,62 +92,56 @@ public final class TropicAPI extends JavaPlugin {
 		return server.getPluginManager().getPlugin(pluginName) != null;
 	}
 
-	public void pluginChecker() {
-		LOGGER.info("[TropicChatCore] Running plugin checker...");
+	private void pluginChecker() {
+		LOGGER.info("[TropicAPI] Running plugin checker...");
 
 		Server server = getServer();
-		server.getPluginManager().getPlugins().equals("TropicChatCore");
-		server.getPluginManager().getPlugins().equals("TropicModeration");
-		server.getPluginManager().getPlugins().equals("TropicAuctions");
 
 		boolean isTropicAuctionsPresent = pluginExists("TropicAuctions");
-		if (isTropicAuctionsPresent) {
-			LOGGER.info("[TropicAuctions] ✓ TropicAuctions is present.");
-			boolean isTropicAuctions = true;
-		}else {
-			LOGGER.warning("[TropicAuctions] ✗ TropicAuctions is NOT present.");
-			boolean isTropicAuctions = false;
-		}
-
 		boolean isTropicModerationPresent = pluginExists("TropicModeration");
-		if (isTropicModerationPresent) {
-			LOGGER.info("[TropicModeration] ✓ TropicModeration is present.");
-			boolean isTropicModeration = true;
-		}
-		else {
-			LOGGER.warning("[TropicModeration] ✗ TropicModeration is NOT present.");
-			boolean isTropicModeration = false;
-		}
-
 		boolean isTropicChatCorePresent = pluginExists("TropicChatCore");
-		if (isTropicChatCorePresent) {
-			LOGGER.info("[TropicChatCore] ✓ TropicChatCore is present.");
-			boolean isTropicChatCore = true;
-		}else {
-			LOGGER.warning("[TropicChatCore] ✗ TropicChatCore is NOT present.");
-			boolean isTropicChatCore = false;
+
+		// shut down only if *none* of the required plugins are present
+		if (!isTropicAuctionsPresent && !isTropicModerationPresent && !isTropicChatCorePresent) {
+			LOGGER.warning("[TropicAPI] One or more dependent plugins are missing. Please make sure a required plugin is installed.");
+			server.shutdown();
+			return;
 		}
 
-		if (!isTropicAuctionsPresent || !isTropicModerationPresent || !isTropicChatCorePresent) {
-			LOGGER.warning("[TropicChatCore] One or more dependent plugins are missing. Please make sure a required plugin is installed.");
-			server.shutdown();
+		// Log presence/absence per plugin
+		if (isTropicAuctionsPresent) {
+			LOGGER.info("[TropicAPI] ✓ TropicAuctions is present.");
 		} else {
-			LOGGER.info("[TropicChatCore] Dependancy check complete.");
+			LOGGER.warning("[TropicAPI] ✗ TropicAuctions is NOT present.");
 		}
+
+		if (isTropicModerationPresent) {
+			LOGGER.info("[TropicAPI] ✓ TropicModeration is present.");
+		} else {
+			LOGGER.warning("[TropicAPI] ✗ TropicModeration is NOT present.");
+		}
+
+		if (isTropicChatCorePresent) {
+			LOGGER.info("[TropicAPI] ✓ TropicChatCore is present.");
+		} else {
+			LOGGER.warning("[TropicAPI] ✗ TropicChatCore is NOT present.");
+		}
+
+		LOGGER.info("[TropicAPI] Dependency check complete.");
 	}
 
 	private boolean initializeGUISystem() {
 		try {
-			LOGGER.info("[TropicChatCore] [1/1] Initializing GUI system...");
+			LOGGER.info("[TropicAPI] [1/1] Initializing GUI system...");
 
 			guiManager = new GUIManager();
 			getServer().getPluginManager().registerEvents(guiManager, this);
 
-			LOGGER.info("[TropicChatCore]   ✓ GUI system initialized");
+			LOGGER.info("[TropicAPI]   ✓ GUI system initialized");
 			return true;
 
 		} catch (Exception e) {
-			LOGGER.severe("[TropicChatCore]   ✗ GUI system initialization error: " + e.getMessage());
+			LOGGER.severe("[TropicAPI]   ✗ GUI system initialization error: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
