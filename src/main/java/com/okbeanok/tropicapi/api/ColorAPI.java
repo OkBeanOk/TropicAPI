@@ -1,7 +1,6 @@
 package com.okbeanok.tropicapi.api;
 
 import com.google.common.collect.ImmutableMap;
-import com.okbeanok.tropicapi.api.color.IridiumColorAPI;
 import com.okbeanok.tropicapi.api.utils.color.GradientPattern;
 import com.okbeanok.tropicapi.api.utils.color.Pattern;
 import com.okbeanok.tropicapi.api.utils.color.RainbowPattern;
@@ -99,7 +98,7 @@ public class ColorAPI {
 	@Nonnull
 	public static List<String> process(@Nonnull Collection<String> strings) {
 		return strings.stream()
-				.map(IridiumColorAPI::process)
+				.map(ColorAPI::process)
 				.collect(Collectors.toList());
 	}
 
@@ -116,16 +115,20 @@ public class ColorAPI {
 	}
 
 	/**
-	 * Colors a String with a gradiant.
+	 * Colors a String with a gradient.
 	 *
 	 * @param string The string we want to color
-	 * @param start  The starting gradiant
-	 * @param end    The ending gradiant
+	 * @param start  The starting gradient
+	 * @param end    The ending gradient
 	 * @since 1.0.0
 	 */
 	@Nonnull
 	public static String color(@Nonnull String string, @Nonnull Color start, @Nonnull Color end) {
-		ChatColor[] colors = createGradient(start, end, withoutSpecialChar(string).length());
+		String cleanString = withoutSpecialChar(string);
+		if (cleanString.isEmpty()) {
+			return string;
+		}
+		ChatColor[] colors = createGradient(start, end, cleanString.length());
 		return apply(string, colors);
 	}
 
@@ -138,7 +141,11 @@ public class ColorAPI {
 	 */
 	@Nonnull
 	public static String rainbow(@Nonnull String string, float saturation) {
-		ChatColor[] colors = createRainbow(withoutSpecialChar(string).length(), saturation);
+		String cleanString = withoutSpecialChar(string);
+		if (cleanString.isEmpty()) {
+			return string;
+		}
+		ChatColor[] colors = createRainbow(cleanString.length(), saturation);
 		return apply(string, colors);
 	}
 
@@ -150,8 +157,12 @@ public class ColorAPI {
 	 */
 	@Nonnull
 	public static ChatColor getColor(@Nonnull String string) {
-		return SUPPORTS_RGB ? ChatColor.of(new Color(Integer.parseInt(string, 16)))
-				: getClosestColor(new Color(Integer.parseInt(string, 16)));
+		try {
+			return SUPPORTS_RGB ? ChatColor.of(new Color(Integer.parseInt(string, 16)))
+					: getClosestColor(new Color(Integer.parseInt(string, 16)));
+		} catch (NumberFormatException e) {
+			return ChatColor.WHITE;
+		}
 	}
 
 	/**
@@ -176,7 +187,11 @@ public class ColorAPI {
 		for (int i = 0; i < source.length(); i++) {
 			char currentChar = source.charAt(i);
 			if (('&' != currentChar && '§' != currentChar) || i + 1 >= source.length()) {
-				stringBuilder.append(colors[outIndex++]).append(specialColors).append(currentChar);
+				if (outIndex < colors.length) {
+					stringBuilder.append(colors[outIndex++]).append(specialColors).append(currentChar);
+				} else {
+					stringBuilder.append(currentChar);
+				}
 				continue;
 			}
 
@@ -229,6 +244,7 @@ public class ColorAPI {
 
 	/**
 	 * Returns a gradient array of chat colors.
+	 * FIXED: Proper gradient calculation with correct color interpolation.
 	 *
 	 * @param start The starting color.
 	 * @param end   The ending color.
@@ -238,19 +254,24 @@ public class ColorAPI {
 	 */
 	@Nonnull
 	private static ChatColor[] createGradient(@Nonnull Color start, @Nonnull Color end, int step) {
-		step = Math.max(step,2);
+		step = Math.max(step, 2);
 		ChatColor[] colors = new ChatColor[step];
-		int stepR = Math.abs(start.getRed() - end.getRed()) / (step - 1);
-		int stepG = Math.abs(start.getGreen() - end.getGreen()) / (step - 1);
-		int stepB = Math.abs(start.getBlue() - end.getBlue()) / (step - 1);
-		int[] direction = new int[] {
-				start.getRed() < end.getRed() ? +1 : -1,
-				start.getGreen() < end.getGreen() ? +1 : -1,
-				start.getBlue() < end.getBlue() ? +1 : -1
-		};
 
 		for (int i = 0; i < step; i++) {
-			Color color = new Color(start.getRed() + ((stepR * i) * direction[0]), start.getGreen() + ((stepG * i) * direction[1]), start.getBlue() + ((stepB * i) * direction[2]));
+			// Calculate interpolation factor (0.0 to 1.0)
+			double ratio = (double) i / (step - 1);
+
+			// Interpolate each RGB component
+			int red = (int) (start.getRed() + ratio * (end.getRed() - start.getRed()));
+			int green = (int) (start.getGreen() + ratio * (end.getGreen() - start.getGreen()));
+			int blue = (int) (start.getBlue() + ratio * (end.getBlue() - start.getBlue()));
+
+			// Clamp values to valid range
+			red = Math.max(0, Math.min(255, red));
+			green = Math.max(0, Math.min(255, green));
+			blue = Math.max(0, Math.min(255, blue));
+
+			Color color = new Color(red, green, blue);
 			if (SUPPORTS_RGB) {
 				colors[i] = ChatColor.of(color);
 			} else {

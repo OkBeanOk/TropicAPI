@@ -83,7 +83,7 @@ public final class TropicAPI extends JavaPlugin {
 		}
 
 		LOGGER.info("========================================");
-		LOGGER.info("[TropicAPI] Shutdown complete!");
+		LOGGER.info(" Shutdown complete!");
 		LOGGER.info("========================================");
     }
 
@@ -93,7 +93,7 @@ public final class TropicAPI extends JavaPlugin {
 	}
 
 	private void pluginChecker() {
-		LOGGER.info("[TropicAPI] Running plugin checker...");
+		LOGGER.info(" Running plugin checker...");
 
 		Server server = getServer();
 
@@ -103,45 +103,45 @@ public final class TropicAPI extends JavaPlugin {
 
 		// shut down only if *none* of the required plugins are present
 		if (!isTropicAuctionsPresent && !isTropicModerationPresent && !isTropicChatCorePresent) {
-			LOGGER.warning("[TropicAPI] One or more dependent plugins are missing. Please make sure a required plugin is installed.");
+			LOGGER.warning(" One or more dependent plugins are missing. Please make sure a required plugin is installed.");
 			server.shutdown();
 			return;
 		}
 
 		// Log presence/absence per plugin
 		if (isTropicAuctionsPresent) {
-			LOGGER.info("[TropicAPI] ✓ TropicAuctions is present.");
+			LOGGER.info(" ✓ TropicAuctions is present.");
 		} else {
-			LOGGER.warning("[TropicAPI] ✗ TropicAuctions is NOT present.");
+			LOGGER.warning(" ✗ TropicAuctions is NOT present.");
 		}
 
 		if (isTropicModerationPresent) {
-			LOGGER.info("[TropicAPI] ✓ TropicModeration is present.");
+			LOGGER.info(" ✓ TropicModeration is present.");
 		} else {
-			LOGGER.warning("[TropicAPI] ✗ TropicModeration is NOT present.");
+			LOGGER.warning(" ✗ TropicModeration is NOT present.");
 		}
 
 		if (isTropicChatCorePresent) {
-			LOGGER.info("[TropicAPI] ✓ TropicChatCore is present.");
+			LOGGER.info(" ✓ TropicChatCore is present.");
 		} else {
-			LOGGER.warning("[TropicAPI] ✗ TropicChatCore is NOT present.");
+			LOGGER.warning(" ✗ TropicChatCore is NOT present.");
 		}
 
-		LOGGER.info("[TropicAPI] Dependency check complete.");
+		LOGGER.info(" Dependency check complete.");
 	}
 
 	private boolean initializeGUISystem() {
 		try {
-			LOGGER.info("[TropicAPI] [1/1] Initializing GUI system...");
+			LOGGER.info(" [1/1] Initializing GUI system...");
 
 			guiManager = new GUIManager();
 			getServer().getPluginManager().registerEvents(guiManager, this);
 
-			LOGGER.info("[TropicAPI]   ✓ GUI system initialized");
+			LOGGER.info("   ✓ GUI system initialized");
 			return true;
 
 		} catch (Exception e) {
-			LOGGER.severe("[TropicAPI]   ✗ GUI system initialization error: " + e.getMessage());
+			LOGGER.severe("   ✗ GUI system initialization error: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
