@@ -1,17 +1,18 @@
 package com.okbeanok.tropicapi.api.utils.color;
 
 /**
- * Represents a color pattern which can be applied to a String.
+ * Represents a color pattern that can be applied to strings.
+ * Implementations process specific color syntax patterns.
+ *
+ * @since 1.0.0
  */
 public interface Pattern {
 
 	/**
-	 * Applies this pattern to the provided String.
-	 * Output might be the same as the input if this pattern is not present.
+	 * Processes a string to apply this pattern's color formatting.
 	 *
-	 * @param string The String to which this pattern should be applied to
-	 * @return The new String with an applied pattern
+	 * @param string The string to process
+	 * @return The processed string with color codes applied
 	 */
 	String process(String string);
-
 }

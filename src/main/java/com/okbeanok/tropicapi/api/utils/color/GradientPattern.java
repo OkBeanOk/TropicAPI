@@ -1,12 +1,15 @@
 package com.okbeanok.tropicapi.api.utils.color;
 
-import com.okbeanok.tropicapi.api.color.IridiumColorAPI;
+import com.okbeanok.tropicapi.api.ColorAPI;
 
 import java.awt.*;
 import java.util.regex.Matcher;
 
 /**
  * Represents a gradient color pattern which can be applied to a String.
+ * Supports patterns like <#FF0000>text</#00FF00> for gradient coloring.
+ *
+ * @since 1.0.0
  */
 public class GradientPattern implements Pattern {
 
@@ -21,7 +24,12 @@ public class GradientPattern implements Pattern {
 	 * @param string The String to which this pattern should be applied to
 	 * @return The new String with an applied pattern
 	 */
+	@Override
 	public String process(String string) {
+		if (string == null || string.isEmpty()) {
+			return string != null ? string : "";
+		}
+
 		Matcher matcher = PATTERN.matcher(string);
 		while (matcher.find()) {
 			String start = matcher.group(1);
@@ -30,7 +38,7 @@ public class GradientPattern implements Pattern {
 
 			string = string.replace(
 					matcher.group(),
-					IridiumColorAPI.color(
+					ColorAPI.color(
 							content,
 							new Color(Integer.parseInt(start, 16)),
 							new Color(Integer.parseInt(end, 16))
@@ -39,5 +47,4 @@ public class GradientPattern implements Pattern {
 		}
 		return string;
 	}
-
 }

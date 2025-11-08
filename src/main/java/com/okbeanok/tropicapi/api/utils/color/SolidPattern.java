@@ -1,12 +1,19 @@
 package com.okbeanok.tropicapi.api.utils.color;
 
-import com.okbeanok.tropicapi.api.color.IridiumColorAPI;
+import com.okbeanok.tropicapi.api.ColorAPI;
 
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class SolidPattern implements Pattern {
+/**
+ * Represents a solid color pattern which can be applied to a String.
+ * Supports patterns like <#FF0000>text or #FF0000 for solid coloring.
+ *
+ * @since 1.0.0
+ */
+public class SolidPattern implements com.okbeanok.tropicapi.api.utils.color.Pattern {
 
-	public static final java.util.regex.Pattern PATTERN = java.util.regex.Pattern.compile("[<{]#([A-Fa-f0-9]{6})[}>]|[&]?#([A-Fa-f0-9]{6})");
+	private static final Pattern PATTERN = Pattern.compile("[<{]#([A-Fa-f0-9]{6})[}>]|[&]?#([A-Fa-f0-9]{6})");
 
 	/**
 	 * Applies a solid RGB color to the provided String.
@@ -15,17 +22,26 @@ public class SolidPattern implements Pattern {
 	 * @param string The String to which this pattern should be applied to
 	 * @return The new String with an applied pattern
 	 */
+	@Override
 	public String process(String string) {
+		if (string == null || string.isEmpty()) {
+			return string != null ? string : "";
+		}
+
 		Matcher matcher = PATTERN.matcher(string);
+		StringBuffer result = new StringBuffer();
+
 		while (matcher.find()) {
 			String color = matcher.group(1);
 			if (color == null) {
 				color = matcher.group(2);
 			}
 
-			string = string.replace(matcher.group(), IridiumColorAPI.getColor(color) + "");
+			String replacement = ColorAPI.getColor(color).toString();
+			matcher.appendReplacement(result, java.util.regex.Matcher.quoteReplacement(replacement));
 		}
-		return string;
-	}
+		matcher.appendTail(result);
 
+		return result.toString();
+	}
 }

@@ -11,255 +11,362 @@ import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ColorAPI {
+/**
+ * Advanced color processing API with support for RGB, gradients, and rainbow effects.
+ * Provides backward compatibility with legacy color codes while supporting modern RGB colors.
+ *
+ * @author PeachesMLG, OkBeanOk, Ash
+ * @version 2.0.0
+ * @since 1.0.0
+ */
+public final class ColorAPI {
+
+	// ==================== Constants ====================
 
 	/**
-	 * Developed by PeachesMLG, forked and redistributed by OkBeanOk (with permission).
-	 * Expanded on the API and updated it - Ash
-	 */
-
-	/**
-	 * The current version of the server in the a form of a major version.
-	 * If the static initialization for this fails, you know something's wrong with
-	 * the server software.
+	 * The current major version of the Minecraft server.
+	 * Returns -1 if running on BungeeCord.
 	 *
 	 * @since 1.0.0
 	 */
-	private static final int VERSION = getVersion();
+	private static final int SERVER_VERSION = detectServerVersion();
 
 	/**
-	 * Cached result if the server version is after the v1.16 RGB update.
+	 * Whether the server supports RGB colors (1.16+).
 	 *
 	 * @since 1.0.0
 	 */
-	private static final boolean SUPPORTS_RGB = VERSION >= 16 || VERSION == -1;
-
-	private static final List<String> SPECIAL_COLORS = Arrays.asList("&l", "&n", "&o", "&k", "&m", "§l", "§n", "§o", "§k", "§m");
+	private static final boolean SUPPORTS_RGB = SERVER_VERSION >= 16 || SERVER_VERSION == -1;
 
 	/**
-	 * Cached result of all legacy colors.
+	 * Special formatting codes that don't affect color but add text styling.
 	 *
 	 * @since 1.0.0
 	 */
-	private static final Map<Color, ChatColor> COLORS = ImmutableMap.<Color, ChatColor>builder()
-			.put(new Color(0), ChatColor.getByChar('0'))
-			.put(new Color(170), ChatColor.getByChar('1'))
-			.put(new Color(43520), ChatColor.getByChar('2'))
-			.put(new Color(43690), ChatColor.getByChar('3'))
-			.put(new Color(11141120), ChatColor.getByChar('4'))
-			.put(new Color(11141290), ChatColor.getByChar('5'))
-			.put(new Color(16755200), ChatColor.getByChar('6'))
-			.put(new Color(11184810), ChatColor.getByChar('7'))
-			.put(new Color(5592405), ChatColor.getByChar('8'))
-			.put(new Color(5592575), ChatColor.getByChar('9'))
-			.put(new Color(5635925), ChatColor.getByChar('a'))
-			.put(new Color(5636095), ChatColor.getByChar('b'))
-			.put(new Color(16733525), ChatColor.getByChar('c'))
-			.put(new Color(16733695), ChatColor.getByChar('d'))
-			.put(new Color(16777045), ChatColor.getByChar('e'))
-			.put(new Color(16777215), ChatColor.getByChar('f')).build();
+	private static final List<String> SPECIAL_FORMATTING_CODES = List.of(
+			"&l", "&n", "&o", "&k", "&m",
+			"§l", "§n", "§o", "§k", "§m"
+	);
 
 	/**
-	 * Cached result of patterns.
+	 * Mapping of legacy colors to their ChatColor equivalents.
+	 * Used for fallback when RGB is not supported.
+	 *
+	 * @since 1.0.0
+	 */
+	private static final Map<Color, ChatColor> LEGACY_COLORS = ImmutableMap.<Color, ChatColor>builder()
+			.put(new Color(0x000000), ChatColor.getByChar('0'))        // Black
+			.put(new Color(0x0000AA), ChatColor.getByChar('1'))        // Dark Blue
+			.put(new Color(0x00AA00), ChatColor.getByChar('2'))        // Dark Green
+			.put(new Color(0x00AAAA), ChatColor.getByChar('3'))        // Dark Aqua
+			.put(new Color(0xAA0000), ChatColor.getByChar('4'))        // Dark Red
+			.put(new Color(0xAA00AA), ChatColor.getByChar('5'))        // Dark Purple
+			.put(new Color(0xFFAA00), ChatColor.getByChar('6'))        // Gold
+			.put(new Color(0xAAAAAA), ChatColor.getByChar('7'))        // Gray
+			.put(new Color(0x555555), ChatColor.getByChar('8'))        // Dark Gray
+			.put(new Color(0x5555FF), ChatColor.getByChar('9'))        // Blue
+			.put(new Color(0x55FF55), ChatColor.getByChar('a'))        // Green
+			.put(new Color(0x55FFFF), ChatColor.getByChar('b'))        // Aqua
+			.put(new Color(0xFF5555), ChatColor.getByChar('c'))        // Red
+			.put(new Color(0xFF55FF), ChatColor.getByChar('d'))        // Light Purple
+			.put(new Color(0xFFFF55), ChatColor.getByChar('e'))        // Yellow
+			.put(new Color(0xFFFFFF), ChatColor.getByChar('f'))        // White
+			.build();
+
+	/**
+	 * List of color patterns to process in order.
 	 *
 	 * @since 1.0.2
 	 */
-	private static final List<Pattern> PATTERNS = Arrays.asList(new GradientPattern(), new SolidPattern(), new RainbowPattern());
+	private static final List<Pattern> COLOR_PATTERNS = List.of(
+			new GradientPattern(),
+			new SolidPattern(),
+			new RainbowPattern()
+	);
 
 	/**
-	 * Processes a string to add color to it.
-	 * Thanks to Distressing for helping with the regex <3
+	 * Regex pattern string for stripping color codes.
 	 *
-	 * @param string The string we want to process
+	 * @since 2.0.0
+	 */
+	private static final String COLOR_STRIP_REGEX = "<#[0-9A-Fa-f]{6}>|[&§][0-9A-Fa-flnokm]|</?[A-Z]{5,8}(:[0-9A-Fa-f]{6})?\\d*>";
+
+	// ==================== Constructor ====================
+
+	/**
+	 * Private constructor to prevent instantiation.
+	 * This is a utility class with only static methods.
+	 */
+	private ColorAPI() {
+		throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+	}
+
+	// ==================== Public API Methods ====================
+
+	/**
+	 * Processes a string to add color formatting.
+	 * Supports gradients, solid colors, rainbow effects, and legacy color codes.
+	 *
+	 * @param string The string to process
+	 * @return The processed string with color codes
 	 * @since 1.0.0
 	 */
 	@Nonnull
 	public static String process(@Nonnull String string) {
-		for (Pattern pattern : PATTERNS) {
-			string = pattern.process(string);
+		if (string == null || string.isEmpty()) {
+			return string != null ? string : "";
 		}
 
-		return ChatColor.translateAlternateColorCodes('&', string);
+		String processed = string;
+		for (Pattern pattern : COLOR_PATTERNS) {
+			processed = pattern.process(processed);
+		}
+
+		return ChatColor.translateAlternateColorCodes('&', processed);
 	}
 
 	/**
 	 * Processes multiple strings in a collection.
 	 *
-	 * @param strings The collection of the strings we are processing
-	 * @return The list of processed strings
+	 * @param strings The collection of strings to process
+	 * @return The list of processed strings with color codes
 	 * @since 1.0.3
 	 */
 	@Nonnull
 	public static List<String> process(@Nonnull Collection<String> strings) {
+		if (strings == null) {
+			return List.of();
+		}
+
 		return strings.stream()
 				.map(ColorAPI::process)
 				.collect(Collectors.toList());
 	}
 
 	/**
-	 * Colors a String.
+	 * Colors a string with a single solid color.
 	 *
-	 * @param string The string we want to color
-	 * @param color  The color we want to set it to
+	 * @param string The string to color
+	 * @param color  The color to apply
+	 * @return The colored string
 	 * @since 1.0.0
 	 */
 	@Nonnull
 	public static String color(@Nonnull String string, @Nonnull Color color) {
-		return (SUPPORTS_RGB ? ChatColor.of(color) : getClosestColor(color)) + string;
+		if (string == null || color == null) {
+			return string != null ? string : "";
+		}
+
+		ChatColor chatColor = SUPPORTS_RGB ? ChatColor.of(color) : getClosestLegacyColor(color);
+		return chatColor + string;
 	}
 
 	/**
-	 * Colors a String with a gradient.
+	 * Colors a string with a gradient from start to end color.
 	 *
-	 * @param string The string we want to color
-	 * @param start  The starting gradient
-	 * @param end    The ending gradient
+	 * @param string The string to color
+	 * @param start  The starting gradient color
+	 * @param end    The ending gradient color
+	 * @return The colored string with gradient effect
 	 * @since 1.0.0
 	 */
 	@Nonnull
 	public static String color(@Nonnull String string, @Nonnull Color start, @Nonnull Color end) {
-		String cleanString = withoutSpecialChar(string);
+		if (string == null || start == null || end == null) {
+			return string != null ? string : "";
+		}
+
+		String cleanString = stripFormatting(string);
 		if (cleanString.isEmpty()) {
 			return string;
 		}
+
 		ChatColor[] colors = createGradient(start, end, cleanString.length());
-		return apply(string, colors);
+		return applyColors(string, colors);
 	}
 
 	/**
-	 * Colors a String with rainbow colors.
+	 * Colors a string with rainbow colors.
 	 *
-	 * @param string     The string which should have rainbow colors
-	 * @param saturation The saturation of the rainbow colors
+	 * @param string     The string to color
+	 * @param saturation The saturation of the rainbow (0.0 to 1.0)
+	 * @return The colored string with rainbow effect
 	 * @since 1.0.3
 	 */
 	@Nonnull
 	public static String rainbow(@Nonnull String string, float saturation) {
-		String cleanString = withoutSpecialChar(string);
+		if (string == null) {
+			return "";
+		}
+
+		String cleanString = stripFormatting(string);
 		if (cleanString.isEmpty()) {
 			return string;
 		}
+
 		ChatColor[] colors = createRainbow(cleanString.length(), saturation);
-		return apply(string, colors);
+		return applyColors(string, colors);
 	}
 
 	/**
-	 * Gets a color from hex code.
+	 * Parses a hex color code and returns the corresponding ChatColor.
 	 *
-	 * @param string The hex code of the color
+	 * @param hexCode The hex code (without # prefix)
+	 * @return The ChatColor representation
 	 * @since 1.0.0
 	 */
 	@Nonnull
-	public static ChatColor getColor(@Nonnull String string) {
+	public static ChatColor getColor(@Nonnull String hexCode) {
 		try {
-			return SUPPORTS_RGB ? ChatColor.of(new Color(Integer.parseInt(string, 16)))
-					: getClosestColor(new Color(Integer.parseInt(string, 16)));
+			Color color = new Color(Integer.parseInt(hexCode, 16));
+			ChatColor result = SUPPORTS_RGB ? ChatColor.of(color) : getClosestLegacyColor(color);
+
+			// Debug logging
+			if (SUPPORTS_RGB) {
+				Bukkit.getLogger().info("[ColorAPI] Converting hex #" + hexCode + " to ChatColor: " + result.toString() + " (length: " + result.toString().length() + ")");
+			}
+
+			return result;
 		} catch (NumberFormatException e) {
+			Bukkit.getLogger().warning("[ColorAPI] Failed to parse hex code: " + hexCode);
 			return ChatColor.WHITE;
 		}
 	}
 
 	/**
-	 * Removes all color codes from the provided String, including IridiumColorAPI
-	 * patterns.
+	 * Removes all color and formatting codes from the string.
 	 *
-	 * @param string The String which should be stripped
-	 * @return The stripped string without color codes
+	 * @param string The string to strip
+	 * @return The stripped string without any color codes
 	 * @since 1.0.5
 	 */
 	@Nonnull
 	public static String stripColorFormatting(@Nonnull String string) {
-		return string.replaceAll("<#[0-9A-F]{6}>|[&§][a-f0-9lnokm]|<[/]?[A-Z]{5,8}(:[0-9A-F]{6})?[0-9]*>", "");
-	}
-
-	@Nonnull
-	private static String apply(@Nonnull String source, ChatColor[] colors) {
-		StringBuilder specialColors = new StringBuilder();
-		StringBuilder stringBuilder = new StringBuilder();
-		int outIndex = 0;
-
-		for (int i = 0; i < source.length(); i++) {
-			char currentChar = source.charAt(i);
-			if (('&' != currentChar && '§' != currentChar) || i + 1 >= source.length()) {
-				if (outIndex < colors.length) {
-					stringBuilder.append(colors[outIndex++]).append(specialColors).append(currentChar);
-				} else {
-					stringBuilder.append(currentChar);
-				}
-				continue;
-			}
-
-			char nextChar = source.charAt(i + 1);
-			if ('r' == nextChar || 'R' == nextChar) {
-				specialColors.setLength(0);
-			} else {
-				specialColors.append(currentChar).append(nextChar);
-			}
-			i++;
+		if (string == null || string.isEmpty()) {
+			return string != null ? string : "";
 		}
-		return stringBuilder.toString();
-	}
-
-	@Nonnull
-	private static String withoutSpecialChar(@Nonnull String source) {
-		String workingString = source;
-		for (String color : SPECIAL_COLORS) {
-			if (workingString.contains(color)) {
-				workingString = workingString.replace(color, "");
-			}
-		}
-		return workingString;
+		return string.replaceAll(COLOR_STRIP_REGEX, "");
 	}
 
 	/**
-	 * Returns a rainbow array of chat colors.
+	 * Checks if the server supports RGB colors (1.16+).
 	 *
-	 * @param step       How many colors we return
-	 * @param saturation The saturation of the rainbow
-	 * @return The array of colors
-	 * @since 1.0.3
+	 * @return true if RGB is supported, false otherwise
+	 * @since 2.0.0
+	 */
+	public static boolean supportsRGB() {
+		return SUPPORTS_RGB;
+	}
+
+	/**
+	 * Gets the detected server version.
+	 *
+	 * @return The major version number, or -1 for BungeeCord
+	 * @since 2.0.0
+	 */
+	public static int getServerVersion() {
+		return SERVER_VERSION;
+	}
+
+	// ==================== Private Helper Methods ====================
+
+	/**
+	 * Applies an array of colors to a string, preserving special formatting codes.
+	 *
+	 * @param source The source string
+	 * @param colors The array of colors to apply
+	 * @return The colored string
 	 */
 	@Nonnull
-	private static ChatColor[] createRainbow(int step, float saturation) {
-		ChatColor[] colors = new ChatColor[step];
-		double colorStep = (1.00 / step);
+	private static String applyColors(@Nonnull String source, @Nonnull ChatColor[] colors) {
+		StringBuilder formatting = new StringBuilder();
+		StringBuilder result = new StringBuilder();
+		int colorIndex = 0;
 
-		for (int i = 0; i < step; i++) {
-			Color color = Color.getHSBColor((float) (colorStep * i), saturation, saturation);
-			if (SUPPORTS_RGB) {
-				colors[i] = ChatColor.of(color);
-			} else {
-				colors[i] = getClosestColor(color);
+		for (int i = 0; i < source.length(); i++) {
+			char current = source.charAt(i);
+
+			// Check if this is a color/formatting code
+			if ((current == '&' || current == '§') && i + 1 < source.length()) {
+				char next = source.charAt(i + 1);
+
+				// Reset formatting on &r or §r
+				if (next == 'r' || next == 'R') {
+					formatting.setLength(0);
+				} else {
+					formatting.append(current).append(next);
+				}
+				i++; // Skip the next character
+				continue;
 			}
+
+			// Apply color and formatting to the character
+			if (colorIndex < colors.length) {
+				result.append(colors[colorIndex++]).append(formatting).append(current);
+			} else {
+				result.append(current);
+			}
+		}
+
+		return result.toString();
+	}
+
+	/**
+	 * Strips special formatting codes from a string.
+	 *
+	 * @param source The source string
+	 * @return The string without special formatting codes
+	 */
+	@Nonnull
+	private static String stripFormatting(@Nonnull String source) {
+		String result = source;
+		for (String code : SPECIAL_FORMATTING_CODES) {
+			result = result.replace(code, "");
+		}
+		return result;
+	}
+
+	/**
+	 * Creates a rainbow color array.
+	 *
+	 * @param length     The number of colors to generate
+	 * @param saturation The saturation value (0.0 to 1.0)
+	 * @return Array of rainbow colors
+	 */
+	@Nonnull
+	private static ChatColor[] createRainbow(int length, float saturation) {
+		ChatColor[] colors = new ChatColor[length];
+		double hueStep = 1.0 / length;
+
+		for (int i = 0; i < length; i++) {
+			Color color = Color.getHSBColor((float) (hueStep * i), saturation, saturation);
+			colors[i] = SUPPORTS_RGB ? ChatColor.of(color) : getClosestLegacyColor(color);
 		}
 
 		return colors;
 	}
 
 	/**
-	 * Returns a gradient array of chat colors.
-	 * FIXED: Proper gradient calculation with correct color interpolation.
+	 * Creates a gradient color array with proper RGB interpolation.
 	 *
-	 * @param start The starting color.
-	 * @param end   The ending color.
-	 * @param step  How many colors we return.
-	 * @author TheViperShow
-	 * @since 1.0.0
+	 * @param start  The starting color
+	 * @param end    The ending color
+	 * @param length The number of colors to generate
+	 * @return Array of gradient colors
 	 */
 	@Nonnull
-	private static ChatColor[] createGradient(@Nonnull Color start, @Nonnull Color end, int step) {
-		step = Math.max(step, 2);
-		ChatColor[] colors = new ChatColor[step];
+	private static ChatColor[] createGradient(@Nonnull Color start, @Nonnull Color end, int length) {
+		length = Math.max(length, 2);
+		ChatColor[] colors = new ChatColor[length];
 
-		for (int i = 0; i < step; i++) {
+		for (int i = 0; i < length; i++) {
 			// Calculate interpolation factor (0.0 to 1.0)
-			double ratio = (double) i / (step - 1);
+			double ratio = (double) i / (length - 1);
 
 			// Interpolate each RGB component
 			int red = (int) (start.getRed() + ratio * (end.getRed() - start.getRed()));
@@ -272,82 +379,124 @@ public class ColorAPI {
 			blue = Math.max(0, Math.min(255, blue));
 
 			Color color = new Color(red, green, blue);
-			if (SUPPORTS_RGB) {
-				colors[i] = ChatColor.of(color);
-			} else {
-				colors[i] = getClosestColor(color);
-			}
+			colors[i] = SUPPORTS_RGB ? ChatColor.of(color) : getClosestLegacyColor(color);
 		}
 
 		return colors;
 	}
 
 	/**
-	 * Returns the closest legacy color from an rgb color
+	 * Finds the closest legacy color for a given RGB color.
+	 * Uses Euclidean distance in RGB color space.
 	 *
-	 * @param color The color we want to transform
-	 * @since 1.0.0
+	 * @param color The target color
+	 * @return The closest legacy ChatColor
 	 */
 	@Nonnull
-	private static ChatColor getClosestColor(Color color) {
-		Color nearestColor = null;
-		double nearestDistance = Integer.MAX_VALUE;
+	private static ChatColor getClosestLegacyColor(@Nonnull Color color) {
+		Color closest = null;
+		double minDistance = Double.MAX_VALUE;
 
-		for (Color constantColor : COLORS.keySet()) {
-			double distance = Math.pow(color.getRed() - constantColor.getRed(), 2) + Math.pow(color.getGreen() - constantColor.getGreen(), 2) + Math.pow(color.getBlue() - constantColor.getBlue(), 2);
-			if (nearestDistance > distance) {
-				nearestColor = constantColor;
-				nearestDistance = distance;
+		for (Map.Entry<Color, ChatColor> entry : LEGACY_COLORS.entrySet()) {
+			Color legacy = entry.getKey();
+			double distance = calculateColorDistance(color, legacy);
+
+			if (distance < minDistance) {
+				closest = legacy;
+				minDistance = distance;
 			}
 		}
-		return COLORS.get(nearestColor);
+
+		return LEGACY_COLORS.get(closest);
 	}
 
 	/**
-	 * Gets a simplified major version (..., 9, 10, ..., 14).
-	 * In most cases, you shouldn't be using this method.
+	 * Calculates the Euclidean distance between two colors in RGB space.
 	 *
-	 * @return the simplified major version, or -1 for bungeecord
-	 * @since 1.0.0
+	 * @param c1 First color
+	 * @param c2 Second color
+	 * @return The distance between the colors
 	 */
-	private static int getVersion() {
+	private static double calculateColorDistance(@Nonnull Color c1, @Nonnull Color c2) {
+		int redDiff = c1.getRed() - c2.getRed();
+		int greenDiff = c1.getGreen() - c2.getGreen();
+		int blueDiff = c1.getBlue() - c2.getBlue();
+
+		return Math.sqrt(redDiff * redDiff + greenDiff * greenDiff + blueDiff * blueDiff);
+	}
+
+	/**
+	 * Detects the major version of the Minecraft server.
+	 *
+	 * @return The major version number, or -1 for BungeeCord
+	 */
+	private static int detectServerVersion() {
+		// Check if running on BungeeCord
 		if (!classExists("org.bukkit.Bukkit") && classExists("net.md_5.bungee.api.ChatColor")) {
+			Bukkit.getLogger().info("[ColorAPI] Detected BungeeCord - Enabling RGB support");
 			return -1;
 		}
 
-		String version = Bukkit.getVersion();
-		Validate.notEmpty(version, "Cannot get major Minecraft version from null or empty string");
+		try {
+			String version = Bukkit.getVersion();
+			String originalVersion = version;
+			Validate.notEmpty(version, "Cannot get major Minecraft version from null or empty string");
 
-		// getVersion()
-		int index = version.lastIndexOf("MC:");
-		if (index != -1) {
-			version = version.substring(index + 4, version.length() - 1);
-		} else if (version.endsWith("SNAPSHOT")) {
-			// getBukkitVersion()
-			index = version.indexOf('-');
-			version = version.substring(0, index);
+			Bukkit.getLogger().info("[ColorAPI] Detecting server version from: " + version);
+
+			// Parse version from getVersion() format: "git-Paper-123 (MC: 1.20.1)"
+			int mcIndex = version.lastIndexOf("MC:");
+			if (mcIndex != -1) {
+				version = version.substring(mcIndex + 4, version.length() - 1).trim();
+				Bukkit.getLogger().info("[ColorAPI] Extracted from MC: tag: " + version);
+			} else if (version.endsWith("SNAPSHOT")) {
+				// Parse from getBukkitVersion() format: "1.20.1-SNAPSHOT"
+				int dashIndex = version.indexOf('-');
+				if (dashIndex != -1) {
+					version = version.substring(0, dashIndex);
+					Bukkit.getLogger().info("[ColorAPI] Extracted from SNAPSHOT: " + version);
+				}
+			}
+
+			// Extract major version from "1.X.Y" format
+			int lastDot = version.lastIndexOf('.');
+			int firstDot = version.indexOf('.');
+			if (firstDot != lastDot) {
+				version = version.substring(0, lastDot);
+				Bukkit.getLogger().info("[ColorAPI] Trimmed to major.minor: " + version);
+			}
+
+			// Extract the major version number after "1."
+			int majorVersion = Integer.parseInt(version.substring(version.indexOf('.') + 1));
+
+			Bukkit.getLogger().info("[ColorAPI] ========================================");
+			Bukkit.getLogger().info("[ColorAPI] Version Detection Results:");
+			Bukkit.getLogger().info("[ColorAPI] Raw version string: " + originalVersion);
+			Bukkit.getLogger().info("[ColorAPI] Detected major version: 1." + majorVersion);
+			Bukkit.getLogger().info("[ColorAPI] RGB Support: " + (majorVersion >= 16 ? "ENABLED" : "DISABLED"));
+			Bukkit.getLogger().info("[ColorAPI] ========================================");
+
+			return majorVersion;
+		} catch (Exception e) {
+			Bukkit.getLogger().warning("[ColorAPI] Failed to detect server version: " + e.getMessage());
+			Bukkit.getLogger().warning("[ColorAPI] Defaulting to version 21 (assuming RGB support)");
+			e.printStackTrace();
+			return 21; // Default to 21 for 1.21.4
 		}
-		// 1.13.2, 1.14.4, etc...
-		int lastDot = version.lastIndexOf('.');
-		if (version.indexOf('.') != lastDot) version = version.substring(0, lastDot);
-
-		return Integer.parseInt(version.substring(2));
 	}
 
 	/**
-	 * Checks if a class exists in the current server
+	 * Checks if a class exists in the classpath.
 	 *
-	 * @param path The path of that class
-	 * @return true if the class exists, false if it doesn't
-	 * @since 1.0.7
+	 * @param className The fully qualified class name
+	 * @return true if the class exists, false otherwise
 	 */
-	private static boolean classExists(final String path) {
+	private static boolean classExists(@Nonnull String className) {
 		try {
-			Class.forName(path);
+			Class.forName(className);
 			return true;
 		} catch (ClassNotFoundException e) {
 			return false;
 		}
 	}
-
 }
