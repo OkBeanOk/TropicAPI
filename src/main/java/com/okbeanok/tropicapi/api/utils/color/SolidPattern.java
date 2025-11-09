@@ -37,7 +37,8 @@ public class SolidPattern implements com.okbeanok.tropicapi.api.utils.color.Patt
 				color = matcher.group(2);
 			}
 
-			String replacement = ColorAPI.getColor(color).toString();
+			// ColorAPI.getColor() now returns a String directly
+			String replacement = ColorAPI.getColor(color);
 			matcher.appendReplacement(result, java.util.regex.Matcher.quoteReplacement(replacement));
 		}
 		matcher.appendTail(result);

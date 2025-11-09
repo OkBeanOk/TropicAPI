@@ -1,10 +1,7 @@
 package com.okbeanok.tropicapi.api;
 
 import com.google.common.collect.ImmutableMap;
-import com.okbeanok.tropicapi.api.utils.color.GradientPattern;
-import com.okbeanok.tropicapi.api.utils.color.Pattern;
-import com.okbeanok.tropicapi.api.utils.color.RainbowPattern;
-import com.okbeanok.tropicapi.api.utils.color.SolidPattern;
+import com.okbeanok.tropicapi.api.color.IridiumColorAPI;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.Bukkit;
@@ -15,6 +12,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.okbeanok.tropicapi.api.utils.color.*;
 
 /**
  * Advanced color processing API with support for RGB, gradients, and rainbow effects.
@@ -162,8 +161,7 @@ public final class ColorAPI {
 			return string != null ? string : "";
 		}
 
-		ChatColor chatColor = SUPPORTS_RGB ? ChatColor.of(color) : getClosestLegacyColor(color);
-		return chatColor + string;
+		return SUPPORTS_RGB ? IridiumColorAPI.color(string, color) : getClosestLegacyColor(color) + string;
 	}
 
 	/**
@@ -181,13 +179,7 @@ public final class ColorAPI {
 			return string != null ? string : "";
 		}
 
-		String cleanString = stripFormatting(string);
-		if (cleanString.isEmpty()) {
-			return string;
-		}
-
-		ChatColor[] colors = createGradient(start, end, cleanString.length());
-		return applyColors(string, colors);
+		return SUPPORTS_RGB ? IridiumColorAPI.color(string, start, end) : applyLegacyGradient(string, start, end);
 	}
 
 	/**
@@ -214,27 +206,19 @@ public final class ColorAPI {
 	}
 
 	/**
-	 * Parses a hex color code and returns the corresponding ChatColor.
+	 * Parses a hex color code and returns the corresponding ChatColor string.
 	 *
 	 * @param hexCode The hex code (without # prefix)
-	 * @return The ChatColor representation
+	 * @return The ChatColor string representation
 	 * @since 1.0.0
 	 */
 	@Nonnull
-	public static ChatColor getColor(@Nonnull String hexCode) {
+	public static String getColor(@Nonnull String hexCode) {
 		try {
 			Color color = new Color(Integer.parseInt(hexCode, 16));
-			ChatColor result = SUPPORTS_RGB ? ChatColor.of(color) : getClosestLegacyColor(color);
-
-			// Debug logging
-			if (SUPPORTS_RGB) {
-				Bukkit.getLogger().info("[ColorAPI] Converting hex #" + hexCode + " to ChatColor: " + result.toString() + " (length: " + result.toString().length() + ")");
-			}
-
-			return result;
+			return SUPPORTS_RGB ? IridiumColorAPI.color("", color) : getClosestLegacyColor(color).toString();
 		} catch (NumberFormatException e) {
-			Bukkit.getLogger().warning("[ColorAPI] Failed to parse hex code: " + hexCode);
-			return ChatColor.WHITE;
+			return ChatColor.WHITE.toString();
 		}
 	}
 
@@ -274,6 +258,20 @@ public final class ColorAPI {
 	}
 
 	// ==================== Private Helper Methods ====================
+
+	/**
+	 * Applies legacy gradient when RGB is not supported.
+	 */
+	@Nonnull
+	private static String applyLegacyGradient(@Nonnull String string, @Nonnull Color start, @Nonnull Color end) {
+		String cleanString = stripFormatting(string);
+		if (cleanString.isEmpty()) {
+			return string;
+		}
+
+		ChatColor[] colors = createGradient(start, end, cleanString.length());
+		return applyColors(string, colors);
+	}
 
 	/**
 	 * Applies an array of colors to a string, preserving special formatting codes.
@@ -474,6 +472,7 @@ public final class ColorAPI {
 			Bukkit.getLogger().info("[ColorAPI] Raw version string: " + originalVersion);
 			Bukkit.getLogger().info("[ColorAPI] Detected major version: 1." + majorVersion);
 			Bukkit.getLogger().info("[ColorAPI] RGB Support: " + (majorVersion >= 16 ? "ENABLED" : "DISABLED"));
+			Bukkit.getLogger().info("[ColorAPI] Using IridiumColorAPI for RGB colors");
 			Bukkit.getLogger().info("[ColorAPI] ========================================");
 
 			return majorVersion;
