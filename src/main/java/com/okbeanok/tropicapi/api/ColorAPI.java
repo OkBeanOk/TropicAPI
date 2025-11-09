@@ -214,12 +214,7 @@ public final class ColorAPI {
 	 */
 	@Nonnull
 	public static String getColor(@Nonnull String hexCode) {
-		try {
-			Color color = new Color(Integer.parseInt(hexCode, 16));
-			return SUPPORTS_RGB ? IridiumColorAPI.color("", color) : getClosestLegacyColor(color).toString();
-		} catch (NumberFormatException e) {
-			return ChatColor.WHITE.toString();
-		}
+		return IridiumColorAPI.getColorString(hexCode);
 	}
 
 	/**

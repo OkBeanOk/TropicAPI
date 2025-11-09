@@ -212,6 +212,33 @@ public final class IridiumColorAPI {
 		return applyColors(string, colors);
 	}
 
+
+	/**
+	 * Parses a hex color code and returns the corresponding ChatColor string.
+	 * This method properly formats RGB colors for Minecraft 1.16+.
+	 *
+	 * @param hexCode The hex code (without # prefix)
+	 * @return The ChatColor string representation
+	 * @since 2.0.0
+	 */
+	@Nonnull
+	public static String getColorString(@Nonnull String hexCode) {
+		try {
+			Color color = new Color(Integer.parseInt(hexCode, 16));
+			if (SUPPORTS_RGB) {
+				// Return the proper RGB format: §x§R§R§G§G§B§B
+				return String.format("§x§%x§%x§%x§%x§%x§%x",
+						(color.getRed() >> 4) & 0xF, color.getRed() & 0xF,
+						(color.getGreen() >> 4) & 0xF, color.getGreen() & 0xF,
+						(color.getBlue() >> 4) & 0xF, color.getBlue() & 0xF);
+			} else {
+				return getClosestLegacyColor(color).toString();
+			}
+		} catch (NumberFormatException e) {
+			return ChatColor.WHITE.toString();
+		}
+	}
+
 	/**
 	 * Parses a hex color code and returns the corresponding ChatColor.
 	 *
@@ -228,6 +255,7 @@ public final class IridiumColorAPI {
 			return ChatColor.WHITE;
 		}
 	}
+
 
 	/**
 	 * Removes all color and formatting codes from the string.

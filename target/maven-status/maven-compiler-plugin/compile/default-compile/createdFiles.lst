@@ -1,6 +1,5 @@
 com\okbeanok\tropicapi\api\color\ChatColor.class
 com\okbeanok\tropicapi\TropicAPI.class
-com\okbeanok\tropicapi\api\color\IridiumColorAPITest.class
 com\okbeanok\tropicapi\api\utils\Log.class
 com\okbeanok\tropicapi\api\ColorAPI.class
 com\okbeanok\tropicapi\api\color\IridiumColorAPI.class
@@ -17,6 +16,5 @@ com\okbeanok\tropicapi\api\utils\color\Pattern.class
 com\okbeanok\tropicapi\api\utils\ReflectionUtil.class
 com\okbeanok\tropicapi\api\utils\color\GradientPattern.class
 com\okbeanok\tropicapi\api\utils\reflect\Version.class
-com\okbeanok\tropicapi\api\color\IridiumColorAPILegacyTest.class
 com\okbeanok\tropicapi\api\CenteredMessagesAPI.class
 com\okbeanok\tropicapi\api\utils\color\DefaultFontInfo.class
