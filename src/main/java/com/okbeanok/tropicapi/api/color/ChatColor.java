@@ -5,8 +5,12 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents available chat colors players can select.
+ * Uses the new color format: & for legacy colors, &#RRGGBB for hex colors, and gradients.
+ *
+ * @version 3.0.0
  */
 public enum ChatColor {
+	// Basic legacy colors
 	WHITE("&f", "White", Material.WHITE_WOOL, null),
 	GRAY("&7", "Gray", Material.GRAY_WOOL, "tropicchat.color.gray"),
 	DARK_GRAY("&8", "Dark Gray", Material.LIGHT_GRAY_WOOL, "tropicchat.color.darkgray"),
@@ -27,11 +31,16 @@ public enum ChatColor {
 	LIGHT_PURPLE("&d", "Light Purple", Material.PINK_WOOL, "tropicchat.color.lightpurple"),
 	DARK_PURPLE("&5", "Dark Purple", Material.PURPLE_WOOL, "tropicchat.color.darkpurple"),
 
-	// Premium colors (require permissions)
-	RAINBOW("<gradient:red:orange:yellow:green:blue:purple>", "Rainbow", Material.NETHER_STAR, "tropicchat.color.rainbow"),
-	GRADIENT_FIRE("<gradient:red:gold>", "Fire Gradient", Material.FIRE_CHARGE, "tropicchat.color.gradient.fire"),
-	GRADIENT_OCEAN("<gradient:blue:aqua>", "Ocean Gradient", Material.HEART_OF_THE_SEA, "tropicchat.color.gradient.ocean"),
-	GRADIENT_FOREST("<gradient:dark_green:green:lime>", "Forest Gradient", Material.OAK_LEAVES, "tropicchat.color.gradient.forest");
+	// Premium rainbow effect (requires permissions)
+	RAINBOW("<RAINBOW100>", "Rainbow", Material.NETHER_STAR, "tropicchat.color.rainbow"),
+
+	// Premium gradient colors (require permissions)
+	GRADIENT_FIRE("<#FF0000></#FFD700>", "Fire Gradient", Material.FIRE_CHARGE, "tropicchat.color.gradient.fire"),
+	GRADIENT_OCEAN("<#0066FF></#00FFFF>", "Ocean Gradient", Material.HEART_OF_THE_SEA, "tropicchat.color.gradient.ocean"),
+	GRADIENT_FOREST("<#006400></#00FF00>", "Forest Gradient", Material.OAK_LEAVES, "tropicchat.color.gradient.forest"),
+	GRADIENT_SUNSET("<#FF6B35></#F7B731>", "Sunset Gradient", Material.ORANGE_TERRACOTTA, "tropicchat.color.gradient.sunset"),
+	GRADIENT_PURPLE("<#9D4EDD></#E0AAFF>", "Purple Dream", Material.PURPLE_GLAZED_TERRACOTTA, "tropicchat.color.gradient.purple"),
+	GRADIENT_MINT("<#00B4D8></#90E0EF>", "Mint Fresh", Material.LIGHT_BLUE_TERRACOTTA, "tropicchat.color.gradient.mint");
 
 	private final String colorCode;
 	private final String displayName;
@@ -80,5 +89,31 @@ public enum ChatColor {
 		} catch (IllegalArgumentException e) {
 			return WHITE; // Default
 		}
+	}
+
+	/**
+	 * Applies this color to text.
+	 * For gradients and rainbow, you need to provide the text to color.
+	 *
+	 * @param text The text to color
+	 * @return The colored text
+	 */
+	@NotNull
+	public String apply(@NotNull String text) {
+		// For rainbow, wrap text in the pattern
+		if (this == RAINBOW) {
+			return com.okbeanok.tropicapi.api.ColorAPI.process("<RAINBOW100>" + text + "</RAINBOW>");
+		}
+
+		// For gradients, wrap text between the gradient tags
+		if (colorCode.startsWith("<#") && colorCode.contains("></#")) {
+			String[] parts = colorCode.split("></#");
+			String startColor = parts[0]; // <#FF0000>
+			String endColor = "</#" + parts[1]; // </#FFD700>
+			return com.okbeanok.tropicapi.api.ColorAPI.process(startColor + text + endColor);
+		}
+
+		// For simple colors, just prepend
+		return com.okbeanok.tropicapi.api.ColorAPI.process(colorCode + text);
 	}
 }

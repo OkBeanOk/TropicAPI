@@ -8,15 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/ColorAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/ColorAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/color/IridiumColorAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/color/IridiumColorAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/ColorAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/ColorAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/IridiumColorAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/IridiumColorAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/IridiumColorAPILegacyTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/IridiumColorAPITest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/SolidPattern.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/SolidPattern.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/color/ChatColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/color/ChatColor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/color/IridiumColorAPI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/color/SolidPattern.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/TropicAPI-0.5.1-Development-shaded.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/TropicAPI-0.5.1-Development-shaded.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/TropicAPI-0.5.1-Development.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/TropicAPI-0.5.1-Development.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
