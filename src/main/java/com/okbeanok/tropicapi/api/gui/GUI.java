@@ -1,116 +1,115 @@
 package com.okbeanok.tropicapi.api.gui;
 
-import org.bukkit.Bukkit;
+import com.okbeanok.tropicapi.api.color.ColorAPI;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * Base class for creating interactive GUIs.
+ * Base GUI class for all Tropic plugins.
+ *
+ * Usage:
+ *   public class ExampleGUI extends GUI {
+ *       public ExampleGUI(Player player) {
+ *           super(player, "&aExample GUI", 3);
+ *       }
+ *
+ *       @Override
+ *       protected void build() {
+ *           setItem(13, someItemStack);
+ *       }
+ *
+ *       @Override
+ *       protected void onClick(int slot) {
+ *           if (slot == 13) {
+ *               // handle click
+ *           }
+ *       }
+ *   }
  */
-public abstract class GUI implements InventoryHolder {
-	protected final Player player;
-	protected final String title;
-	protected final int size;
-	protected final Inventory inventory;
-	protected final Map<Integer, GUIButton> buttons;
-	protected boolean cancelAllClicks;
+public abstract class GUI {
 
-	public GUI(Player player, String title, int rows) {
+	private final Player player;
+	private final String title;
+	private final int rows;
+	private final Inventory inventory;
+	private boolean built = false;
+
+	/**
+	 * @param player viewer
+	 * @param title  uncolored or &/hex colored title (ColorAPI is applied automatically)
+	 * @param rows   number of rows (1–6)
+	 */
+	protected GUI(Player player, String title, int rows) {
 		this.player = player;
+		this.rows = Math.max(1, Math.min(6, rows));
 		this.title = title;
-		this.size = rows * 9;
-		this.inventory = Bukkit.createInventory(this, size, title);
-		this.buttons = new HashMap<>();
-		this.cancelAllClicks = true;
-	}
 
-	@Override
-	public Inventory getInventory() {
-		return inventory;
-	}
+		String coloredTitle = ColorAPI.color(title);
+		this.inventory = GUIAPI.create(coloredTitle, this.rows);
 
-	/**
-	 * Sets a button at the specified slot.
-	 */
-	public void setButton(int slot, GUIButton button) {
-		if (slot >= 0 && slot < size) {
-			buttons.put(slot, button);
-			inventory.setItem(slot, button.getItem());
-		}
-	}
-
-	/**
-	 * Sets an item at the specified slot without a button action.
-	 */
-	public void setItem(int slot, ItemStack item) {
-		if (slot >= 0 && slot < size) {
-			inventory.setItem(slot, item);
-		}
-	}
-
-	/**
-	 * Fills empty slots with the specified item.
-	 */
-	public void fillEmpty(ItemStack item) {
-		for (int i = 0; i < size; i++) {
-			if (inventory.getItem(i) == null) {
-				inventory.setItem(i, item);
+		// Register click handler once per GUI instance
+		GUIAPI.onClick(this.inventory, event -> {
+			// only handle clicks from this gui's player
+			if (!event.getPlayer().getUniqueId().equals(player.getUniqueId())) {
+				return;
 			}
-		}
+			handleClick(event);
+		});
 	}
 
 	/**
-	 * Opens the GUI for the player.
-	 */
-	public void open() {
-		build();
-		player.openInventory(inventory);
-	}
-
-	/**
-	 * Refreshes the GUI content.
-	 */
-	public void refresh() {
-		inventory.clear();
-		buttons.clear();
-		build();
-	}
-
-	/**
-	 * Called when the GUI is built. Override to add items and buttons.
+	 * Build your inventory contents here.
+	 * This is called lazily the first time open() is invoked.
 	 */
 	protected abstract void build();
 
 	/**
-	 * Called when a slot is clicked.
+	 * Simple click handler by raw slot index.
+	 * Override this in your GUIs if you don't care about ClickType / ItemStack.
 	 */
-	public void onClick(InventoryClickEvent event) {
-		if (cancelAllClicks) {
-			event.setCancelled(true);
-		}
-
-		int slot = event.getRawSlot();
-		if (slot >= 0 && slot < size) {
-			GUIButton button = buttons.get(slot);
-			if (button != null) {
-				button.onClick(event);
-			}
-		}
+	protected void onClick(int slot) {
+		// default no-op
 	}
 
 	/**
-	 * Called when the inventory is closed.
+	 * Advanced click handler with full event.
+	 * Default implementation delegates to onClick(int slot).
+	 * Override this instead if you need click type, item, etc.
 	 */
-	public void onClose(InventoryCloseEvent event) {
-		// Override if needed
+	protected void onClick(GUIClickEvent event) {
+		onClick(event.getSlot());
 	}
+
+	/**
+	 * Called internally by the click handler to dispatch the event.
+	 */
+	private void handleClick(GUIClickEvent event) {
+		onClick(event);
+	}
+
+	/**
+	 * Opens this GUI for the player.
+	 */
+	public void open() {
+		if (!built) {
+			build();
+			built = true;
+		}
+		GUIAPI.open(player, inventory);
+	}
+
+	/**
+	 * Closes the GUI and unregisters click handling for this inventory.
+	 */
+	public void close() {
+		if (player.getOpenInventory().getTopInventory().equals(inventory)) {
+			player.closeInventory();
+		}
+		GUIAPI.unregister(inventory);
+	}
+
+	// ---- Helper methods for subclasses ----
 
 	public Player getPlayer() {
 		return player;
@@ -118,5 +117,25 @@ public abstract class GUI implements InventoryHolder {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setItem(int slot, ItemStack item) {
+		inventory.setItem(slot, item);
+	}
+
+	public ItemStack getItem(int slot) {
+		return inventory.getItem(slot);
+	}
+
+	public boolean isBuilt() {
+		return built;
 	}
 }

@@ -2,11 +2,9 @@ com\okbeanok\tropicapi\api\color\ChatColor.class
 com\okbeanok\tropicapi\TropicAPI.class
 com\okbeanok\tropicapi\api\utils\Log.class
 com\okbeanok\tropicapi\api\ColorAPI.class
-com\okbeanok\tropicapi\api\color\IridiumColorAPI.class
 com\okbeanok\tropicapi\api\utils\color\RainbowPattern.class
 com\okbeanok\tropicapi\api\gui\GUIManager.class
 com\okbeanok\tropicapi\api\gui\GUIButton.class
-com\okbeanok\tropicapi\api\utils\color\SolidPattern.class
 com\okbeanok\tropicapi\api\utils\color\PatternUtil.class
 com\okbeanok\tropicapi\api\gui\GUI.class
 com\okbeanok\tropicapi\api\utils\reflect\ReflectMethod.class
