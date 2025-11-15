@@ -472,7 +472,7 @@ Check other Tropic plugins:
 ```
 
 java // import com.okbeanok.tropicapi.api.integration.TropicPluginsAPI;
-boolean hasAuctions = TropicPluginsAPI.isPresent("TropicAuctions"); TropicPluginsAPI.getInfo("TropicAuctions").ifPresent(info -> { getLogger().info("TropicAuctions version: " + info.getVersion()); });```
+boolean hasTropicChat = TropicPluginsAPI.isPresent("TropicChatCore"); TropicPluginsAPI.getInfo("TropicChatCore").ifPresent(info -> { getLogger().info("TropicChatCore version: " + info.getVersion()); });```
 
 Use the internal event bus:
 ```
