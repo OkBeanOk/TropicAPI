@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-0.5.2--Development-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2--Development-blue.svg)
 ![Minecraft](https://img.shields.io/badge/minecraft-1.21.x-green.svg)
 ![Java](https://img.shields.io/badge/java-21-orange.svg)
 ![Build](https://img.shields.io/badge/build-Maven-orange.svg)
@@ -74,12 +74,20 @@ Core color utilities (via `ColorService` and a static facade `ColorAPI`):
 
 - Legacy `&` codes (`&a`, `&b`, `&l`, etc.)
 - Hex codes:
-  - `#RRGGBB`
-  - `&#RRGGBB`
+    - `#RRGGBB`
+    - `&#RRGGBB`
+- **Gradient tags**:
+    - `<gradient:#ff0000:#00ff00:#0000ff>Your text here</gradient>`
+    - Any number of color stops are supported; colors are smoothly interpolated across the text.
 - Strip color codes
 - Send colored messages to `CommandSender` / `Player`
 
 ---
+
+## 🧪 Usage Examples
+
+> Examples assume TropicAPI is present and initialized.  
+> Import statements are shown as comments to keep the snippets focused.
 
 ### 📐 Centered Messages
 

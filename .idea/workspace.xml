@@ -5,67 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5fccd74d-3f35-463c-bb25-6eaf92aa63b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/color/ColorAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/color/ColorService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/config/ConfigHandle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/config/ConfigService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/config/Configs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/event/TropicEventBus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/event/TropicEvents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/ConfirmGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/GUIAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/GUIClickEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/GUIService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/PaginatedGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/integration/TropicPluginInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/integration/TropicPlugins.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/integration/TropicPluginsAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/message/CenteredMessagesAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/message/CenteredMessagesService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/message/MessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/message/Messages.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/player/PlayerContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/player/PlayerProfile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/player/PlayerProfileService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/task/TaskService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/task/Tasks.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/util/Cooldowns.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/util/Durations.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/util/Perms.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/color/ColorServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/config/ConfigServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/event/TropicEventBusImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/gui/GUIServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/integration/TropicPluginsImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/message/CenteredMessagesServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/message/MessageServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/player/PlayerProfileServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/color/GradientUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/TropicAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/TropicAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/CenteredMessagesAPI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/ColorAPI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/color/ChatColor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/GUIButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/GUIManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/ItemBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/ItemBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/Log.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/ReflectionUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/color/DefaultFontInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/color/GradientPattern.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/color/Pattern.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/color/PatternUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/color/RainbowPattern.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/reflect/ReflectMethod.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/utils/reflect/Version.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/TropicAPI-0.5.1-Development-shaded.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/TropicAPI-0.5.1-Development.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/ColorAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/ColorAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/ChatColor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/ChatColor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/IridiumColorAPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/SolidPattern.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/color/ColorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/color/ColorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/ColorAPI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/ChatColor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/Log.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/ReflectionUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/DefaultFontInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/GradientPattern.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/Pattern.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/PatternUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/RainbowPattern.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/reflect/ReflectMethod.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/reflect/Version.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
@@ -95,23 +50,23 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.TropicAPI.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Minetropica-Dev/TropicAPI&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.TropicAPI.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "D:/Minetropica-Dev/TropicAPI",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Nathaniel\Desktop\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\gui" />
