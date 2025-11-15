@@ -41,9 +41,6 @@
   - [Player Profiles & PlayerContext](#player-profiles--playercontext)
   - [TropicPluginsAPI & Events](#tropicpluginsapi--events)
   - [Utility Helpers (Cooldowns / Durations / Perms / TropicLog)](#utility-helpers-cooldowns--durations--perms--tropiclog)
-- [Building From Source](#-building-from-source)
-- [Contributing](#-contributing)
-- [License](#-license)
 
 ---
 
@@ -506,34 +503,3 @@ Logging with module name:
 java // import com.okbeanok.tropicapi.api.util.TropicLog;
 TropicLog.info("auctions", "Loaded 10 auctions."); TropicLog.warn("moderation", "No default rules configured."); TropicLog.error("chat", "Failed to connect to chat backend.");``` 
 
----
-
-## 🛠 Building From Source
-
-1. Clone the repository.
-2. Ensure you have **Java 21** and **Maven** installed.
-3. Run:
-```
-
-bash mvn clean package```
-
-4. The built jar (and shaded variant, if configured) will be in `target/`.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome:
-
-- Bug reports, feature requests, and questions via issues.
-- Pull requests with:
-    - Small, focused changes.
-    - Clear explanation and, if possible, tests or examples.
-
----
-
-## 📄 License
-
-This project is licensed under a license chosen by the author.  
-Refer to the `LICENSE` file (or project description) for exact terms.
-```
