@@ -109,7 +109,19 @@ public abstract class GUI {
 		GUIAPI.unregister(inventory);
 	}
 
+	/**
+	 * Rebuilds the GUI contents and reopens it.
+	 * Can be called by subclasses when data changes (e.g. list updates).
+	 */
+	public void refresh() {
+		inventory.clear();
+		build();
+		built = true;
+		GUIAPI.open(player, inventory);
+	}
 	// ---- Helper methods for subclasses ----
+
+
 
 	public Player getPlayer() {
 		return player;
@@ -138,4 +150,6 @@ public abstract class GUI {
 	public boolean isBuilt() {
 		return built;
 	}
+
+
 }

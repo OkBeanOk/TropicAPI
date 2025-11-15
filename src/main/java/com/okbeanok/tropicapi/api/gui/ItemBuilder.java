@@ -1,6 +1,7 @@
 package com.okbeanok.tropicapi.api.gui;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -34,6 +35,13 @@ public final class ItemBuilder {
 		return this;
 	}
 
+	public ItemBuilder lore(List<String> lines) {
+		if (lines != null) {
+			lore.addAll(lines);
+		}
+		return this;
+	}
+
 	public ItemBuilder addFlag(ItemFlag flag) {
 		meta.addItemFlags(flag);
 		return this;
@@ -41,6 +49,13 @@ public final class ItemBuilder {
 
 	public ItemBuilder unbreakable(boolean unbreakable) {
 		meta.setUnbreakable(unbreakable);
+		return this;
+	}
+
+	public ItemBuilder glow() {
+		// Use a harmless enchant and hide it
+		meta.addEnchant(Enchantment.UNBREAKING, 1, true);
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		return this;
 	}
 

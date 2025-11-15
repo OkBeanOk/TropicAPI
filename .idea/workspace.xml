@@ -5,26 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5fccd74d-3f35-463c-bb25-6eaf92aa63b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/color/GradientUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/color/ColorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/color/ColorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/ColorAPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/ChatColor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/Log.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/ReflectionUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/DefaultFontInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/GradientPattern.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/Pattern.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/PatternUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/color/RainbowPattern.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/reflect/ReflectMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/utils/reflect/Version.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/ItemBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/gui/ItemBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
