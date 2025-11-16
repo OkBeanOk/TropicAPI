@@ -1,5 +1,6 @@
 package com.okbeanok.tropicapi.api.gui;
 
+import com.okbeanok.tropicapi.api.color.ColorAPI;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -25,19 +26,50 @@ public final class ItemBuilder {
 		return new ItemBuilder(material);
 	}
 
+	/**
+	 * Sets the display name, automatically colorizing (&, hex, gradients).
+	 */
 	public ItemBuilder name(String displayName) {
+		if (displayName != null) {
+			meta.setDisplayName(ColorAPI.color(displayName));
+		}
+		return this;
+	}
+
+	/**
+	 * Sets the display name as-is, without automatic colorizing.
+	 */
+	public ItemBuilder nameRaw(String displayName) {
 		meta.setDisplayName(displayName);
 		return this;
 	}
 
+	/**
+	 * Adds lore lines, automatically colorizing each one.
+	 */
 	public ItemBuilder lore(String... lines) {
-		lore.addAll(Arrays.asList(lines));
+		if (lines != null) {
+			lore.addAll(Arrays.asList(ColorAPI.color(lines)));
+		}
 		return this;
 	}
 
+	/**
+	 * Adds lore lines, automatically colorizing each one.
+	 */
 	public ItemBuilder lore(List<String> lines) {
+		if (lines != null && !lines.isEmpty()) {
+			lore.addAll(Arrays.asList(ColorAPI.color(lines.toArray(new String[0]))));
+		}
+		return this;
+	}
+
+	/**
+	 * Adds lore lines without automatic colorizing.
+	 */
+	public ItemBuilder loreRaw(String... lines) {
 		if (lines != null) {
-			lore.addAll(lines);
+			lore.addAll(Arrays.asList(lines));
 		}
 		return this;
 	}
@@ -53,7 +85,6 @@ public final class ItemBuilder {
 	}
 
 	public ItemBuilder glow() {
-		// Use a harmless enchant and hide it
 		meta.addEnchant(Enchantment.UNBREAKING, 1, true);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		return this;

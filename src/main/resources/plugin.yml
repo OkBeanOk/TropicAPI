@@ -5,5 +5,3 @@ api-version: '1.21'
 author: OkBeanOk
 description: TropicAPI is a core library for other Tropic plugins.
 website: https://github.com/okbeanok/tropicchatcore
-softdepend: [TropicChatCore, TropicModeration, TropicAuction, LiteBans, ItemsAdder]
-depend: [LuckPerms]

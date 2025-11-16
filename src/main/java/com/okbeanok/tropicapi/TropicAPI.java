@@ -180,10 +180,11 @@ public final class TropicAPI extends JavaPlugin {
 
 		Server server = getServer();
 
+		boolean isTropicaFarmingPresent = pluginExists("TropicaFarming");
 		boolean isTropicAuctionsPresent = pluginExists("TropicaAuctions");
 		boolean isTropicModerationPresent = pluginExists("TropicModeration");
 		boolean isTropicChatCorePresent = pluginExists("TropicChatCore");
-		boolean isTropicaFarmingPresent = pluginExists("TropicaFarming");
+
 
 		// shut down only if *none* of the required plugins are present
 		if (!isTropicAuctionsPresent && !isTropicModerationPresent && !isTropicChatCorePresent) {
@@ -195,7 +196,7 @@ public final class TropicAPI extends JavaPlugin {
 		if (isTropicaFarmingPresent) {
 			LOGGER.info(" ✓ TropicaFarming is present.");
 		} else {
-			LOGGER.info(" ✗ TropicaFarming is NOT present.");
+			LOGGER.warning(" ✗ TropicaFarming is NOT present.");
 		}
 
 		// Log presence/absence per plugin
