@@ -276,14 +276,23 @@ public class ColorServiceImpl implements ColorService {
 	}
 
 	private static ChatColor translateHex(String hex) {
-		if (NMSUtil.getVersionNumber() >= 16)
+		// Prefer native RGB support whenever available.
+		try {
 			return ChatColor.of(hex);
+		} catch (NoSuchMethodError | NoClassDefFoundError e) {
+			// Older servers or implementations without ChatColor.of:
+			// fall back to legacy approximation below.
+		}
 		return translateHex(Color.decode(hex));
 	}
 
 	private static ChatColor translateHex(Color color) {
-		if (NMSUtil.getVersionNumber() >= 16)
+		// Prefer native RGB support whenever available.
+		try {
 			return ChatColor.of(color);
+		} catch (NoSuchMethodError | NoClassDefFoundError e) {
+			// Older servers: approximate to legacy color.
+		}
 
 		int minDist = Integer.MAX_VALUE;
 		ChatColor legacy = ChatColor.WHITE;
