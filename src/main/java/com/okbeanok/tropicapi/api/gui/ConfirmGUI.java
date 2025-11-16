@@ -10,15 +10,22 @@ public class ConfirmGUI extends GUI {
 	private final Runnable onCancel;
 
 	public ConfirmGUI(Player player, String title, Runnable onConfirm, Runnable onCancel) {
-		super(player, title, 9);
+		super(player, title, 1);
 		this.onConfirm = onConfirm;
 		this.onCancel = onCancel;
 	}
 
 	@Override
 	public void build() {
-		ItemStack yes = new ItemStack(Material.LIME_WOOL);
-		ItemStack no = new ItemStack(Material.RED_WOOL);
+		ItemStack yes = ItemBuilder.of(Material.LIME_WOOL)
+				.name("&a&lYes")
+				.lore("&7Click to confirm.")
+				.build();
+
+		ItemStack no = ItemBuilder.of(Material.RED_WOOL)
+				.name("&c&lNo")
+				.lore("&7Click to cancel.")
+				.build();
 
 		setItem(3, yes);
 		setItem(5, no);

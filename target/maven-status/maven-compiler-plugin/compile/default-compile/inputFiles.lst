@@ -4,6 +4,7 @@ D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\player\Pla
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\config\ConfigService.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\integration\TropicPluginsAPI.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\integration\TropicPluginInfo.java
+D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\util\NMSUtil.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\util\Durations.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\gui\ConfirmGUI.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\gui\PaginatedGUI.java
@@ -18,6 +19,7 @@ D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\internal\playe
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\color\ColorService.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\internal\message\CenteredMessagesServiceImpl.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\integration\TropicPlugins.java
+D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\util\ClassUtils.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\gui\GUIAPI.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\gui\GUIService.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\config\Configs.java

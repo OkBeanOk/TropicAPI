@@ -1,6 +1,5 @@
 package com.okbeanok.tropicapi.api.util;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
