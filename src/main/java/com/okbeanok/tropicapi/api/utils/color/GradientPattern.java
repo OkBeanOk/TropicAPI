@@ -1,7 +1,5 @@
 package com.okbeanok.tropicapi.api.utils.color;
 
-import com.okbeanok.tropicapi.api.ColorAPI;
-
 import java.awt.*;
 import java.util.regex.Matcher;
 

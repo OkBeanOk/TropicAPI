@@ -1,6 +1,5 @@
 package com.okbeanok.tropicapi.api.gui;
 
-import com.okbeanok.tropicapi.api.ColorAPI;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
