@@ -30,6 +30,7 @@ import java.util.Objects;
  * @version 1.0.0
  * @see ReflectionUtils
  */
+
 public class Titles {
 
     private static final Object TIMES;
