@@ -241,8 +241,8 @@ These are small but reduce a lot of repetitive boilerplate in individual plugins
 ### 📦 Installation (Maven)
 
 Add the repository and dependency:
-```
 
+```
 xml jitpack.io https://jitpack.io
 com.okbeanok TropicAPI 0.5.2-Development provided```
 
