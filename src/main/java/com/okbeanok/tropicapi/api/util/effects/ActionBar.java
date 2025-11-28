@@ -1,6 +1,7 @@
-package com.okbeanok.tropicapi.api.util.reflection;
+package com.okbeanok.tropicapi.api.util.effects;
 
 import com.okbeanok.tropicapi.TropicAPI;
+import com.okbeanok.tropicapi.api.util.reflection.ReflectionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

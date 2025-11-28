@@ -1,4 +1,4 @@
-package com.okbeanok.tropicapi.api.util.reflection;
+package com.okbeanok.tropicapi.api.util.effects;
 
 import org.bukkit.entity.ArmorStand;
 
