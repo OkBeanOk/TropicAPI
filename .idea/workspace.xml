@@ -5,67 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5fccd74d-3f35-463c-bb25-6eaf92aa63b9" name="Changes" comment="Version bump">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/util/VersionUtility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/bungee/LuckPermsHook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/TropicAPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/ColorAPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/color/ColorService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/config/ConfigHandle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/config/ConfigService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/config/Configs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/event/TropicEventBus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/event/TropicEvents.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/ConfirmGUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUIAPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUIClickEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUIService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/ItemBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/PaginatedGUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/integration/TropicPluginInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/integration/TropicPlugins.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/integration/TropicPluginsAPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/message/CenteredMessagesAPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/message/CenteredMessagesService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/message/MessageService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/message/Messages.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/player/PlayerContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/player/PlayerProfile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/player/PlayerProfileService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/task/TaskService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/task/Tasks.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/util/ClassUtils$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/util/ClassUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/util/Cooldowns.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/util/Durations.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/util/NMSUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/util/Perms.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/util/TropicLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/color/ColorServiceImpl$AnimatedGradient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/color/ColorServiceImpl$AnimatedRainbow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/color/ColorServiceImpl$ChatColorHexMapping.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/color/ColorServiceImpl$ColorGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/color/ColorServiceImpl$Gradient$TwoStopGradient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/color/ColorServiceImpl$Gradient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/color/ColorServiceImpl$Rainbow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/color/ColorServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/color/GradientUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/config/ConfigServiceImpl$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/config/ConfigServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/event/TropicEventBusImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/gui/GUIServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/integration/TropicPluginsImpl$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/integration/TropicPluginsImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/message/CenteredMessagesServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/message/MessageServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/player/PlayerProfileServiceImpl$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/player/PlayerProfileServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/task/TaskServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
