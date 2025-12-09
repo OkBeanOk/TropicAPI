@@ -1,4 +1,4 @@
-package com.okbeanok.tropicapi.animation;
+package com.okbeanok.tropicapi.world.animation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
