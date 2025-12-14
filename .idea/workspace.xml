@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fccd74d-3f35-463c-bb25-6eaf92aa63b9" name="Changes" comment="Future/past version support, bumped version">
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/world/particle/AnimatedShapes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/world/particle/ParticleEmitter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/world/particle/Particles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/world/particle/Shape.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/world/particle/Shapes.java" afterDir="false" />
+    <list default="true" id="5fccd74d-3f35-463c-bb25-6eaf92aa63b9" name="Changes" comment="Introducing the new ParticleAPI which will be used for Holograms and L2D down the line.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TropicAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TropicAPI.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/animation/AnimationAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/world/animation/AnimationAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,8 +66,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Maven.TropicAPI [clean].executor": "Run",
+    "Maven.TropicAPI [deploy].executor": "Run",
     "Maven.TropicAPI [install].executor": "Run",
     "Maven.TropicAPI [package].executor": "Run",
+    "Maven.TropicAPI [site].executor": "Run",
     "Maven.TropicAPI.executor": "Debug",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -90,7 +85,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
@@ -141,6 +136,13 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5fccd74d-3f35-463c-bb25-6eaf92aa63b9" name="Changes" comment="" />
@@ -181,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764323425978</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Introducing the new ParticleAPI which will be used for Holograms and L2D down the line.">
+      <option name="closed" value="true" />
+      <created>1765267949895</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1765267949895</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +206,8 @@
     <MESSAGE value="ReflectionAPI with Actionbar/titles support." />
     <MESSAGE value="Reorganised some files. Made AnimationAPI.java" />
     <MESSAGE value="Version bump" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version bump" />
+    <MESSAGE value="Introducing the new ParticleAPI which will be used for Holograms and L2D down the line." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introducing the new ParticleAPI which will be used for Holograms and L2D down the line." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
