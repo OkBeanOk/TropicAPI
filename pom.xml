@@ -6,7 +6,7 @@
 
     <groupId>com.okbeanok</groupId>
     <artifactId>TropicAPI</artifactId>
-    <version>1.4.0-Development</version>
+    <version>1.4.1-Development</version>
     <packaging>jar</packaging>
 
     <name>TropicAPI</name>
@@ -177,6 +177,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>7.0.1</version>
             <scope>provided</scope>
         </dependency>
 
