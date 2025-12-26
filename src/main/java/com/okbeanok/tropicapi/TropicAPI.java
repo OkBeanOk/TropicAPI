@@ -47,6 +47,14 @@ public final class TropicAPI extends JavaPlugin {
 	private ConfigService configService;
 	private PlayerProfileService playerProfileService;
 
+	boolean isTropicaFarmingPresent = pluginExists("TropicaFarming");
+	boolean isTropicAuctionsPresent = pluginExists("TropicaAuctions");
+	boolean isTropicModerationPresent = pluginExists("TropicModeration");
+	boolean isTropicChatCorePresent = pluginExists("TropicChatCore");
+	boolean isTropicEcoPresent = pluginExists("TropicaEco");
+	boolean isTropicaFishingPresent = pluginExists("fishing");
+	boolean isTropicaHologramsPresent = pluginExists("TropicaHolograms");
+
 	public static TropicAPI getInstance() {
 		return instance;
 	}
@@ -180,11 +188,6 @@ public final class TropicAPI extends JavaPlugin {
 
 		Server server = getServer();
 
-		boolean isTropicaFarmingPresent = pluginExists("TropicaFarming");
-		boolean isTropicAuctionsPresent = pluginExists("TropicaAuctions");
-		boolean isTropicModerationPresent = pluginExists("TropicModeration");
-		boolean isTropicChatCorePresent = pluginExists("TropicChatCore");
-
 
 		// shut down only if *none* of the required plugins are present
 		if (!isTropicAuctionsPresent && !isTropicModerationPresent && !isTropicChatCorePresent) {
@@ -216,6 +219,24 @@ public final class TropicAPI extends JavaPlugin {
 			LOGGER.info(" ✓ TropicChatCore is present.");
 		} else {
 			LOGGER.warning(" ✗ TropicChatCore is NOT present.");
+		}
+
+		if (isTropicaFishingPresent) {
+			LOGGER.info(" ✓ TropicaFishing is present.");
+		} else {
+			LOGGER.warning(" ✗ TropicaFishing is NOT present.");
+		}
+
+		if (isTropicaHologramsPresent) {
+			LOGGER.info(" ✓ TropicaHolograms is present.");
+		} else {
+			LOGGER.warning(" ✗ TropicaHolograms is NOT present.");
+		}
+
+		if (isTropicEcoPresent) {
+			LOGGER.info(" ✓ TropicaEco is present.");
+		} else {
+			LOGGER.warning(" ✗ TropicaEco is NOT present.");
 		}
 
 		LOGGER.info(" Dependency check complete.");
