@@ -2,6 +2,6 @@ name: TropicAPI
 version: '${project.version}'
 main: com.okbeanok.tropicapi.TropicAPI
 api-version: '1.21'
-author: OkBeanOk
-description: TropicAPI is a core library for other Tropic plugins.
-website: https://github.com/okbeanok/tropicchatcore
+author: OkBeanOk, MigrateAccount
+description: TropicAPI is a core library for other Tropica plugins.
+website: https://github.com/OkBeanOk/TropicAPI

@@ -186,23 +186,12 @@ public final class TropicAPI extends JavaPlugin {
 	private void pluginChecker() {
 		LOGGER.info(" Running plugin checker...");
 
-		Server server = getServer();
-
-
-		// shut down only if *none* of the required plugins are present
-		if (!isTropicAuctionsPresent && !isTropicModerationPresent && !isTropicChatCorePresent) {
-			LOGGER.warning(" One or more dependent plugins are missing. Please make sure a required plugin is installed.");
-			server.shutdown();
-			return;
-		}
-
 		if (isTropicaFarmingPresent) {
 			LOGGER.info(" ✓ TropicaFarming is present.");
 		} else {
 			LOGGER.warning(" ✗ TropicaFarming is NOT present.");
 		}
 
-		// Log presence/absence per plugin
 		if (isTropicAuctionsPresent) {
 			LOGGER.info(" ✓ TropicAuctions is present.");
 		} else {
