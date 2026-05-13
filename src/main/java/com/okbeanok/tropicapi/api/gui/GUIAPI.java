@@ -57,6 +57,13 @@ public final class GUIAPI {
 	}
 
 	/**
+	 * Register a click handler for that inventory with an interaction mode.
+	 */
+	public static void onClick(Inventory inventory, Consumer<GUIClickEvent> handler, GUIInteractionMode interactionMode) {
+		s().registerClickHandler(inventory, handler, interactionMode);
+	}
+
+	/**
 	 * Unregister any click handler for that inventory.
 	 */
 	public static void unregister(Inventory inventory) {

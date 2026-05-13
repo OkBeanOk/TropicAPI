@@ -1,6 +1,7 @@
 package com.okbeanok.tropicapi.internal.gui;
 
 import com.okbeanok.tropicapi.api.gui.GUIClickEvent;
+import com.okbeanok.tropicapi.api.gui.GUIInteractionMode;
 import com.okbeanok.tropicapi.api.gui.GUIService;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -19,7 +20,13 @@ import java.util.function.Consumer;
  */
 public final class GUIServiceImpl implements GUIService, Listener {
 
-	private final Map<Inventory, Consumer<GUIClickEvent>> handlers = new WeakHashMap<>();
+	private final Map<Inventory, RegisteredGui> guis = new WeakHashMap<>();
+
+	private record RegisteredGui(
+			Consumer<GUIClickEvent> handler,
+			GUIInteractionMode interactionMode
+	) {
+	}
 
 	public GUIServiceImpl(org.bukkit.plugin.Plugin plugin) {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -40,34 +47,41 @@ public final class GUIServiceImpl implements GUIService, Listener {
 
 	@Override
 	public void registerClickHandler(Inventory inventory, Consumer<GUIClickEvent> handler) {
+		registerClickHandler(inventory, handler, GUIInteractionMode.LOCKED);
+	}
+
+	@Override
+	public void registerClickHandler(Inventory inventory, Consumer<GUIClickEvent> handler, GUIInteractionMode interactionMode) {
 		if (inventory == null || handler == null) return;
-		handlers.put(inventory, handler);
+		guis.put(inventory, new RegisteredGui(handler, interactionMode == null ? GUIInteractionMode.LOCKED : interactionMode));
 	}
 
 	@Override
 	public void unregisterGui(Inventory inventory) {
-		handlers.remove(inventory);
+		guis.remove(inventory);
 	}
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
 		Inventory inventory = event.getInventory();
-		Consumer<GUIClickEvent> handler = handlers.get(inventory);
-		if (handler == null) return;
+		RegisteredGui gui = guis.get(inventory);
+		if (gui == null) return;
 
 		if (!(event.getWhoClicked() instanceof Player player)) return;
 
-		// Prevent item movement; GUI is "click-only" by default.
-		event.setCancelled(true);
+		if (gui.interactionMode() == GUIInteractionMode.LOCKED) {
+			event.setCancelled(true);
+		}
 
 		GUIClickEvent guiClick = new GUIClickEvent(
 				player,
 				inventory,
 				event.getSlot(),
 				event.getClick(),
-				event.getCurrentItem()
+				event.getCurrentItem(),
+				event
 		);
 
-		handler.accept(guiClick);
+		gui.handler().accept(guiClick);
 	}
 }

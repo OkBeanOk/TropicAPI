@@ -27,6 +27,11 @@ public interface GUIService {
 	void registerClickHandler(Inventory inventory, Consumer<GUIClickEvent> handler);
 
 	/**
+	 * Registers a click handler for the given inventory with an interaction mode.
+	 */
+	void registerClickHandler(Inventory inventory, Consumer<GUIClickEvent> handler, GUIInteractionMode interactionMode);
+
+	/**
 	 * Unregisters any handler for the given inventory.
 	 */
 	void unregisterGui(Inventory inventory);

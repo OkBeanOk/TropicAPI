@@ -33,6 +33,7 @@ public abstract class GUI {
 	private final String title;
 	private final int rows;
 	private final Inventory inventory;
+	private final GUIInteractionMode interactionMode;
 	private boolean built = false;
 
 	/**
@@ -41,9 +42,20 @@ public abstract class GUI {
 	 * @param rows   number of rows (1–6)
 	 */
 	protected GUI(Player player, String title, int rows) {
+		this(player, title, rows, GUIInteractionMode.LOCKED);
+	}
+
+	/**
+	 * @param player          viewer
+	 * @param title           uncolored or &/hex colored title
+	 * @param rows            number of rows (1–6)
+	 * @param interactionMode whether players can move items in this GUI
+	 */
+	protected GUI(Player player, String title, int rows, GUIInteractionMode interactionMode) {
 		this.player = player;
 		this.rows = Math.max(1, Math.min(6, rows));
 		this.title = title;
+		this.interactionMode = interactionMode;
 
 		String coloredTitle = ColorAPI.color(title);
 		this.inventory = GUIAPI.create(coloredTitle, this.rows);
@@ -55,7 +67,7 @@ public abstract class GUI {
 				return;
 			}
 			handleClick(event);
-		});
+		}, this.interactionMode);
 	}
 
 	/**
@@ -137,6 +149,10 @@ public abstract class GUI {
 
 	public Inventory getInventory() {
 		return inventory;
+	}
+
+	public GUIInteractionMode getInteractionMode() {
+		return interactionMode;
 	}
 
 	public void setItem(int slot, ItemStack item) {
