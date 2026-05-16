@@ -44,6 +44,7 @@ com\okbeanok\tropicapi\internal\player\PlayerProfileServiceImpl.class
 com\okbeanok\tropicapi\api\util\effects\ActionBar.class
 com\okbeanok\tropicapi\internal\color\ColorServiceImpl$Gradient.class
 com\okbeanok\tropicapi\internal\integration\TropicPluginsImpl$1.class
+com\okbeanok\tropicapi\api\gui\GUIInteractionMode.class
 com\okbeanok\tropicapi\api\database\MySQLConnector.class
 com\okbeanok\tropicapi\api\player\PlayerProfileService.class
 com\okbeanok\tropicapi\internal\message\MessageServiceImpl.class
@@ -56,6 +57,7 @@ com\okbeanok\tropicapi\api\gui\GUI.class
 com\okbeanok\tropicapi\api\message\CenteredMessagesAPI.class
 com\okbeanok\tropicapi\api\util\ClassUtils$1.class
 com\okbeanok\tropicapi\api\database\SQLiteConnector.class
+com\okbeanok\tropicapi\internal\gui\GUIServiceImpl$RegisteredGui.class
 com\okbeanok\tropicapi\internal\event\TropicEventBusImpl.class
 com\okbeanok\tropicapi\api\sign\SignInput$Session.class
 com\okbeanok\tropicapi\internal\color\ColorServiceImpl$AnimatedRainbow.class

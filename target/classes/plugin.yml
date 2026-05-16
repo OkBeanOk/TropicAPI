@@ -1,5 +1,5 @@
 name: TropicAPI
-version: '1.4.2-Development'
+version: '1.4.3'
 main: com.okbeanok.tropicapi.TropicAPI
 api-version: '1.21'
 author: OkBeanOk, MigrateAccount
