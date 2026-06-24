@@ -84,6 +84,20 @@ public class TropicPluginsImpl implements TropicPlugins {
 					"Optional core systems integration.",
 					false,
 					31
+			),
+			new TropicPluginRegistryEntry(
+					"TropicHolograms",
+					Material.ARMOR_STAND,
+					"Optional hologram display integration.",
+					false,
+					33
+			),
+			new TropicPluginRegistryEntry(
+					"TropicFarming",
+					Material.WHEAT,
+					"Optional farming-related integration.",
+					false,
+					35
 			)
 	);
 
