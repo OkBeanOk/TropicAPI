@@ -5,23 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5fccd74d-3f35-463c-bb25-6eaf92aa63b9" name="Changes" comment="Fixed an issue with Kotlin not showing as SRC, bumped ver.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/integration/TropicPluginRegistryResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/commands/TropicAPICommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/integration/TropicPluginRegistryEntry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/TropicAPI-1.4.2-Development-shaded.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/TropicAPI-1.4.2-Development.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUIAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUIAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUIClickEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUIClickEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUIService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/api/gui/GUIService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/gui/GUIServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/okbeanok/tropicapi/internal/gui/GUIServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/TropicAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/TropicAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/integration/TropicPlugins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/integration/TropicPlugins.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/integration/TropicPluginsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/api/integration/TropicPluginsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/integration/TropicPluginsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okbeanok/tropicapi/internal/integration/TropicPluginsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="CopilotChats">
     <option name="panelChat">
@@ -98,6 +99,65 @@
     <commands />
     <urls />
   </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000017183397" />
+      <entry key="S30" value="1.0030959815170875" />
+      <entry key="S60" value="1.3117617918756164" />
+      <entry key="M2" value="5.679320598525056" />
+      <entry key="M5" value="31.071720108263555" />
+      <entry key="M10" value="59.80321046911527" />
+      <entry key="M15" value="74.95959460627714" />
+      <entry key="M30" value="94.28839622762418" />
+      <entry key="H1" value="105.88261626604559" />
+      <entry key="H2" value="112.2384990805318" />
+      <entry key="H4" value="115.56690435450825" />
+      <entry key="D1" value="118.42040331426048" />
+      <entry key="W1" value="118.91701699672191" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.3791213865227726E-226" />
+      <entry key="S2" value="3.426893622764721E-57" />
+      <entry key="S5" value="2.593941929551632E-23" />
+      <entry key="S10" value="5.093075622403061E-12" />
+      <entry key="S30" value="1.7205212525090019E-4" />
+      <entry key="S60" value="0.013116864154625532" />
+      <entry key="M2" value="0.11452887912935118" />
+      <entry key="M5" value="0.42030640106780576" />
+      <entry key="M10" value="0.6483104202986449" />
+      <entry key="M15" value="0.7490693054466222" />
+      <entry key="M30" value="0.8654879002312063" />
+      <entry key="H1" value="0.9303160216997266" />
+      <entry key="H2" value="0.9645289118008471" />
+      <entry key="H4" value="0.9821043283688589" />
+      <entry key="D1" value="0.9969949017791694" />
+      <entry key="W1" value="0.9995701463285893" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="4.116929002778731E-6" />
+      <entry key="MS500" value="0.08373647515174006" />
+      <entry key="S2" value="0.5379335965038162" />
+      <entry key="S5" value="0.7803536526624212" />
+      <entry key="S10" value="0.8833762820301353" />
+      <entry key="S30" value="0.9627599122911186" />
+      <entry key="S60" value="1.3039621618066124" />
+      <entry key="M2" value="5.7816313599264735" />
+      <entry key="M5" value="31.48493012570568" />
+      <entry key="M10" value="60.44707753008965" />
+      <entry key="M15" value="75.7054249115242" />
+      <entry key="M30" value="95.15209981929407" />
+      <entry key="H1" value="106.8119931106338" />
+      <entry key="H2" value="113.20254583274446" />
+      <entry key="H4" value="116.54876435234054" />
+      <entry key="D1" value="119.41735703332856" />
+      <entry key="W1" value="119.91658124839185" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -125,8 +185,10 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Minetropica-Dev/TropicAPI&quot;,
@@ -138,6 +200,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -198,8 +261,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.32098.37" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.32098.37" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
       </set>
     </attachedChunks>
   </component>
@@ -210,6 +272,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1761361218833</updated>
+      <workItem from="1780111657310" duration="178000" />
     </task>
     <task id="LOCAL-00001" summary="ReflectionAPI with Actionbar/titles support.">
       <option name="closed" value="true" />
@@ -288,6 +351,10 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

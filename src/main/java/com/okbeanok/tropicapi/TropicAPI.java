@@ -7,6 +7,7 @@ import com.okbeanok.tropicapi.api.config.Configs;
 import com.okbeanok.tropicapi.api.event.TropicEvents;
 import com.okbeanok.tropicapi.api.gui.GUIAPI;
 import com.okbeanok.tropicapi.api.gui.GUIService;
+import com.okbeanok.tropicapi.api.integration.TropicPluginRegistryResult;
 import com.okbeanok.tropicapi.api.integration.TropicPluginsAPI;
 import com.okbeanok.tropicapi.api.message.CenteredMessagesAPI;
 import com.okbeanok.tropicapi.api.message.CenteredMessagesService;
@@ -17,6 +18,7 @@ import com.okbeanok.tropicapi.api.task.TaskService;
 import com.okbeanok.tropicapi.api.task.Tasks;
 import com.okbeanok.tropicapi.api.util.TropicLog;
 import com.okbeanok.tropicapi.internal.color.ColorServiceImpl;
+import com.okbeanok.tropicapi.internal.commands.TropicAPICommand;
 import com.okbeanok.tropicapi.internal.config.ConfigServiceImpl;
 import com.okbeanok.tropicapi.internal.event.TropicEventBusImpl;
 import com.okbeanok.tropicapi.internal.gui.GUIServiceImpl;
@@ -26,34 +28,24 @@ import com.okbeanok.tropicapi.internal.message.MessageServiceImpl;
 import com.okbeanok.tropicapi.internal.player.PlayerProfileServiceImpl;
 import com.okbeanok.tropicapi.internal.task.TaskServiceImpl;
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
-import org.bukkit.entity.Player;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
 public final class TropicAPI extends JavaPlugin {
 
-	public static Logger LOGGER = Bukkit.getLogger();
+	public static final Logger LOGGER = Bukkit.getLogger();
 
 	private static TropicAPI instance;
 
 	private ColorService colorService;
 	private CenteredMessagesService centeredMessagesService;
 	private GUIService guiService;
-
 	private MessageService messageService;
 	private TaskService taskService;
 	private ConfigService configService;
 	private PlayerProfileService playerProfileService;
-
-	boolean isTropicaFarmingPresent = pluginExists("TropicaFarming");
-	boolean isTropicAuctionsPresent = pluginExists("TropicaAuctions");
-	boolean isTropicModerationPresent = pluginExists("TropicModeration");
-	boolean isTropicChatCorePresent = pluginExists("TropicChatCore");
-	boolean isTropicEcoPresent = pluginExists("TropicaEco");
-	boolean isTropicaFishingPresent = pluginExists("fishing");
-	boolean isTropicaHologramsPresent = pluginExists("TropicaHolograms");
 
 	public static TropicAPI getInstance() {
 		return instance;
@@ -61,7 +53,7 @@ public final class TropicAPI extends JavaPlugin {
 
 	@Override
 	public void onLoad() {
-		// Plugin load logic
+		instance = this;
 	}
 
 	@Override
@@ -72,32 +64,20 @@ public final class TropicAPI extends JavaPlugin {
 
 		TropicLog.init(LOGGER);
 
-		LOGGER.info("========================================");
-		LOGGER.info(" Starting initialization...");
-		LOGGER.info(" Version: " + getDescription().getVersion());
-		LOGGER.info(" Server: " + Bukkit.getVersion());
-		LOGGER.info("========================================");
-
-		// Check for dependent plugins
-		pluginChecker();
+		logStartupHeader();
 
 		try {
-			// Core services
 			initializeCoreServices();
+			registerCommands();
+			logPluginRegistry();
 
-			// Initialize GUI System (existing GUIManager if you still need it)
 			if (!initializeGUISystem()) {
-				LOGGER.severe(" ✗ GUI system initialization failed! Disabling plugin...");
+				LOGGER.severe("[TropicAPI] GUI system initialization failed. Disabling plugin...");
 				getServer().getPluginManager().disablePlugin(this);
 				return;
 			}
 
-			long endTime = System.currentTimeMillis();
-			LOGGER.info("========================================");
-			LOGGER.info(" ✓ Plugin enabled successfully!");
-			LOGGER.info(" Initialization took " + (endTime - startTime) + "ms");
-			LOGGER.info("========================================");
-
+			logStartupComplete(startTime);
 		} catch (Exception e) {
 			LOGGER.severe("========================================");
 			LOGGER.severe(" ✗ CRITICAL ERROR during initialization!");
@@ -110,19 +90,15 @@ public final class TropicAPI extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-
 		LOGGER.info("========================================");
 		LOGGER.info(" Starting shutdown sequence...");
 		LOGGER.info("========================================");
 
-
 		try {
-			LOGGER.info(" Clearing references...");
-			colorService = null;
-			centeredMessagesService = null;
-			guiService = null;
+			clearServices();
+			LOGGER.info("[TropicAPI] ✓ References cleared");
 		} catch (Exception e) {
-			LOGGER.warning(" ✗ Failed to clear references: " + e.getMessage());
+			LOGGER.warning("[TropicAPI] ✗ Failed to clear references: " + e.getMessage());
 		}
 
 		LOGGER.info("========================================");
@@ -133,115 +109,138 @@ public final class TropicAPI extends JavaPlugin {
 	private void initializeCoreServices() {
 		LOGGER.info("[TropicAPI] [1/2] Initializing core services...");
 
-		// Color
-		this.colorService = new ColorServiceImpl();
-		ColorAPI.init(colorService);
-		LOGGER.info("[TropicAPI]   ✓ ColorService initialized");
-
-		// Centered messages
-		this.centeredMessagesService = new CenteredMessagesServiceImpl(colorService);
-		CenteredMessagesAPI.init(centeredMessagesService);
-		LOGGER.info("[TropicAPI]   ✓ CenteredMessagesService initialized");
-
-		// GUI
-		this.guiService = new GUIServiceImpl(this);
-		GUIAPI.init(guiService);
-		LOGGER.info("[TropicAPI]   ✓ GUIService initialized");
-
-		// Messaging
-		this.messageService = new MessageServiceImpl();
-		Messages.init(messageService);
-		LOGGER.info("[TropicAPI]   ✓ MessageService initialized");
-
-		// Tasks
-		this.taskService = new TaskServiceImpl(this);
-		Tasks.init(taskService);
-		LOGGER.info("[TropicAPI]   ✓ TaskService initialized");
-
-		// Config
-		this.configService = new ConfigServiceImpl();
-		Configs.init(configService);
-		LOGGER.info("[TropicAPI]   ✓ ConfigService initialized");
-
-		// Player profiles
-		this.playerProfileService = new PlayerProfileServiceImpl();
-		LOGGER.info("[TropicAPI]   ✓ PlayerProfileService initialized");
-
-		// Tropic plugin integration
-		TropicPluginsAPI.init(new TropicPluginsImpl());
-		LOGGER.info("[TropicAPI]   ✓ TropicPlugins integration initialized");
-
-		// Internal event bus
-		TropicEvents.init(new TropicEventBusImpl());
-		LOGGER.info("[TropicAPI]   ✓ TropicEventBus initialized");
+		initializeColorService();
+		initializeCenteredMessagesService();
+		initializeGUIService();
+		initializeMessageService();
+		initializeTaskService();
+		initializeConfigService();
+		initializePlayerProfileService();
+		initializePluginIntegrationService();
+		initializeEventBus();
 
 		LOGGER.info("[TropicAPI] [1/2] Core services ready.");
 	}
 
-	boolean pluginExists(String pluginName) {
-		Server server = getServer();
-		return server.getPluginManager().getPlugin(pluginName) != null;
+	private void initializeColorService() {
+		this.colorService = new ColorServiceImpl();
+		ColorAPI.init(colorService);
+		LOGGER.info("[TropicAPI]   ✓ ColorService initialized");
 	}
 
-	private void pluginChecker() {
-		LOGGER.info(" Running plugin checker...");
+	private void initializeCenteredMessagesService() {
+		this.centeredMessagesService = new CenteredMessagesServiceImpl(colorService);
+		CenteredMessagesAPI.init(centeredMessagesService);
+		LOGGER.info("[TropicAPI]   ✓ CenteredMessagesService initialized");
+	}
 
-		if (isTropicaFarmingPresent) {
-			LOGGER.info(" ✓ TropicaFarming is present.");
-		} else {
-			LOGGER.warning(" ✗ TropicaFarming is NOT present.");
+	private void initializeGUIService() {
+		this.guiService = new GUIServiceImpl(this);
+		GUIAPI.init(guiService);
+		LOGGER.info("[TropicAPI]   ✓ GUIService initialized");
+	}
+
+	private void initializeMessageService() {
+		this.messageService = new MessageServiceImpl();
+		Messages.init(messageService);
+		LOGGER.info("[TropicAPI]   ✓ MessageService initialized");
+	}
+
+	private void initializeTaskService() {
+		this.taskService = new TaskServiceImpl(this);
+		Tasks.init(taskService);
+		LOGGER.info("[TropicAPI]   ✓ TaskService initialized");
+	}
+
+	private void initializeConfigService() {
+		this.configService = new ConfigServiceImpl();
+		Configs.init(configService);
+		LOGGER.info("[TropicAPI]   ✓ ConfigService initialized");
+	}
+
+	private void initializePlayerProfileService() {
+		this.playerProfileService = new PlayerProfileServiceImpl();
+		LOGGER.info("[TropicAPI]   ✓ PlayerProfileService initialized");
+	}
+
+	private void initializePluginIntegrationService() {
+		TropicPluginsAPI.init(new TropicPluginsImpl());
+		LOGGER.info("[TropicAPI]   ✓ TropicPlugins integration initialized");
+	}
+
+	private void initializeEventBus() {
+		TropicEvents.init(new TropicEventBusImpl());
+		LOGGER.info("[TropicAPI]   ✓ TropicEventBus initialized");
+	}
+
+	private void registerCommands() {
+		PluginCommand command = getCommand("tropicapi");
+
+		if (command == null) {
+			LOGGER.warning("[TropicAPI]   ✗ Failed to register /tropicapi command. Is it listed in plugin.yml?");
+			return;
 		}
 
-		if (isTropicAuctionsPresent) {
-			LOGGER.info(" ✓ TropicAuctions is present.");
-		} else {
-			LOGGER.warning(" ✗ TropicAuctions is NOT present.");
+		command.setExecutor(new TropicAPICommand());
+		LOGGER.info("[TropicAPI]   ✓ Commands registered");
+	}
+
+	private void logPluginRegistry() {
+		LOGGER.info("[TropicAPI] Running plugin registry check...");
+
+		for (TropicPluginRegistryResult result : TropicPluginsAPI.getRegistryResults()) {
+			String pluginName = result.entry().pluginName();
+
+			if (result.enabled()) {
+				LOGGER.info("[TropicAPI]   ✓ " + pluginName + " is enabled. Version: " + result.version());
+			} else if (result.loaded()) {
+				LOGGER.warning("[TropicAPI]   ! " + pluginName + " is loaded but disabled.");
+			} else if (result.entry().required()) {
+				LOGGER.warning("[TropicAPI]   ✗ Required plugin " + pluginName + " is NOT loaded.");
+			} else {
+				LOGGER.info("[TropicAPI]   - Optional plugin " + pluginName + " is not loaded.");
+			}
 		}
 
-		if (isTropicModerationPresent) {
-			LOGGER.info(" ✓ TropicModeration is present.");
-		} else {
-			LOGGER.warning(" ✗ TropicModeration is NOT present.");
-		}
-
-		if (isTropicChatCorePresent) {
-			LOGGER.info(" ✓ TropicChatCore is present.");
-		} else {
-			LOGGER.warning(" ✗ TropicChatCore is NOT present.");
-		}
-
-		if (isTropicaFishingPresent) {
-			LOGGER.info(" ✓ TropicaFishing is present.");
-		} else {
-			LOGGER.warning(" ✗ TropicaFishing is NOT present.");
-		}
-
-		if (isTropicaHologramsPresent) {
-			LOGGER.info(" ✓ TropicaHolograms is present.");
-		} else {
-			LOGGER.warning(" ✗ TropicaHolograms is NOT present.");
-		}
-
-		if (isTropicEcoPresent) {
-			LOGGER.info(" ✓ TropicaEco is present.");
-		} else {
-			LOGGER.warning(" ✗ TropicaEco is NOT present.");
-		}
-
-		LOGGER.info(" Dependency check complete.");
+		LOGGER.info("[TropicAPI] Plugin registry check complete.");
 	}
 
 	private boolean initializeGUISystem() {
 		try {
-			LOGGER.info(" [2/2] Initializing GUI manager...");
-
-			LOGGER.info("   ✓ GUI manager initialized");
+			LOGGER.info("[TropicAPI] [2/2] Initializing GUI manager...");
+			LOGGER.info("[TropicAPI]   ✓ GUI manager initialized");
 			return true;
-
 		} catch (Exception e) {
-			LOGGER.severe("   ✗ GUI system initialization error: " + e.getMessage());
+			LOGGER.severe("[TropicAPI]   ✗ GUI system initialization error: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	private void clearServices() {
+		colorService = null;
+		centeredMessagesService = null;
+		guiService = null;
+		messageService = null;
+		taskService = null;
+		configService = null;
+		playerProfileService = null;
+	}
+
+	private void logStartupHeader() {
+		LOGGER.info("========================================");
+		LOGGER.info(" Starting initialization...");
+		LOGGER.info(" Version: " + getDescription().getVersion());
+		LOGGER.info(" Server: " + Bukkit.getVersion());
+		LOGGER.info("========================================");
+	}
+
+	private void logStartupComplete(long startTime) {
+		long endTime = System.currentTimeMillis();
+
+		LOGGER.info("========================================");
+		LOGGER.info(" ✓ Plugin enabled successfully!");
+		LOGGER.info(" Initialization took " + (endTime - startTime) + "ms");
+		LOGGER.info("========================================");
 	}
 }

@@ -1,6 +1,7 @@
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\gui\ItemBuilder.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\util\effects\ActionBar.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\config\ConfigService.java
+D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\internal\integration\TropicPluginRegistryEntry.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\util\NMSUtil.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\world\particle\Shapes.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\gui\PaginatedGUI.java
@@ -10,8 +11,10 @@ D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\internal\color
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\internal\integration\TropicPluginsImpl.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\util\effects\ArmorStandName.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\util\ClassUtils.java
+D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\internal\commands\TropicAPICommand.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\gui\GUIAPI.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\config\Configs.java
+D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\integration\TropicPluginRegistryResult.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\internal\config\ConfigServiceImpl.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\internal\gui\GUIServiceImpl.java
 D:\Minetropica-Dev\TropicAPI\src\main\java\com\okbeanok\tropicapi\api\util\effects\Titles.java

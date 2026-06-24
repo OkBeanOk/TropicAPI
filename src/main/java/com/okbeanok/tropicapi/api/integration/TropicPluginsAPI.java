@@ -1,5 +1,8 @@
 package com.okbeanok.tropicapi.api.integration;
 
+import com.okbeanok.tropicapi.internal.integration.TropicPluginRegistryEntry;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,8 +28,28 @@ public final class TropicPluginsAPI {
 		return s().isPresent(pluginName);
 	}
 
+	public static boolean isEnabled(String pluginName) {
+		return s().isEnabled(pluginName);
+	}
+
 	public static Optional<TropicPluginInfo> getInfo(String pluginName) {
 		return s().getInfo(pluginName);
+	}
+
+	public static Optional<TropicPluginRegistryEntry> getRegistryEntry(String pluginName) {
+		return s().getRegistryEntry(pluginName);
+	}
+
+	public static Optional<TropicPluginRegistryResult> getRegistryResult(String pluginName) {
+		return s().getRegistryResult(pluginName);
+	}
+
+	public static List<TropicPluginRegistryEntry> getRegistryEntries() {
+		return s().getRegistryEntries();
+	}
+
+	public static List<TropicPluginRegistryResult> getRegistryResults() {
+		return s().getRegistryResults();
 	}
 
 	public static Set<TropicPluginInfo> getAll() {

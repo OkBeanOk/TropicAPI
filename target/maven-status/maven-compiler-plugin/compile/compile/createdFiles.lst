@@ -36,11 +36,13 @@ com\okbeanok\tropicapi\api\util\TropicLog.class
 com\okbeanok\tropicapi\api\database\DatabaseConnector$ConnectionCallback.class
 com\okbeanok\tropicapi\api\gui\ItemBuilder.class
 com\okbeanok\tropicapi\api\event\TropicEventBus.class
+com\okbeanok\tropicapi\api\integration\TropicPluginRegistryResult.class
 com\okbeanok\tropicapi\api\gui\ConfirmGUI.class
 com\okbeanok\tropicapi\api\gui\GUIService.class
 com\okbeanok\tropicapi\internal\color\ColorServiceImpl$Gradient$TwoStopGradient.class
 com\okbeanok\tropicapi\api\database\DatabaseConnector.class
 com\okbeanok\tropicapi\internal\player\PlayerProfileServiceImpl.class
+com\okbeanok\tropicapi\internal\integration\TropicPluginRegistryEntry.class
 com\okbeanok\tropicapi\api\util\effects\ActionBar.class
 com\okbeanok\tropicapi\internal\color\ColorServiceImpl$Gradient.class
 com\okbeanok\tropicapi\internal\integration\TropicPluginsImpl$1.class
@@ -69,6 +71,7 @@ com\okbeanok\tropicapi\internal\color\ColorServiceImpl$ColorGenerator.class
 com\okbeanok\tropicapi\api\gui\PaginatedGUI.class
 com\okbeanok\tropicapi\api\message\MessageService.class
 com\okbeanok\tropicapi\api\util\effects\ArmorStandName.class
+com\okbeanok\tropicapi\internal\commands\TropicAPICommand.class
 com\okbeanok\tropicapi\internal\color\GradientUtil.class
 com\okbeanok\tropicapi\api\color\ColorService.class
 com\okbeanok\tropicapi\api\util\ClassUtils.class

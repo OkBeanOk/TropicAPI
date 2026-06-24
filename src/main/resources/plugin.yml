@@ -5,3 +5,11 @@ api-version: '1.21'
 author: OkBeanOk, MigrateAccount
 description: TropicAPI is a core library for other Tropica plugins.
 website: https://github.com/OkBeanOk/TropicAPI
+
+commands:
+  tropicapi:
+    description: Main TropicAPI command.
+    usage: /tropicapi
+    aliases:
+      - tapi
+      - tropic
